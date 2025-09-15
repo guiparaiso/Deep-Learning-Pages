@@ -1,5 +1,5 @@
 site_name: Exercícios Perceptron
-site_url: https://guiparaiso.github.io/perceptron-exercises/
+site_url: https://guiparaiso.github.io/Deep-Learning-Pages/
 nav:
   - Home: index.md
   - Perceptron:
