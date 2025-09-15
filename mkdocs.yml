@@ -2,11 +2,8 @@ site_name: Exercícios Perceptron
 site_url: https://guiparaiso.github.io/perceptron-exercises/
 nav:
   - Home: index.md
-  - Exercise 1:
-      - Data Generation: exercise1/data_generation.md
-      - Perceptron Implementation: exercise1/perceptron_implementation.md
-  - Exercise 2:
-      - Data Generation: exercise2/data_generation.md
-      - Perceptron Implementation: exercise2/perceptron_implementation.md
+  - Perceptron:
+      - Exercise 1: perceptron/exercise1.md
+      - Exercise 2: perceptron/exercise2.md
 theme:
   name: material
