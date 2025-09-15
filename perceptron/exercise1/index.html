@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://guiparaiso.github.io/perceptron-exercises/exercise1/pp.implementation/">
+        <link rel="canonical" href="https://guiparaiso.github.io/perceptron-exercises/perceptron/exercise1/">
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../exercise2/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Exercise 1 — Perceptron Implementation Task - Exercícios Perceptron</title>
+        <title>Exercise 1 - Exercícios Perceptron</title>
       
     
     
@@ -60,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercise-1-perceptron-implementation-task" class="md-skip">
+        <a href="#exercise-1" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercise 1 — Perceptron Implementation Task
+              Exercise 1
             
           </span>
         </div>
@@ -211,22 +215,60 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
   
   
   <span class="md-ellipsis">
@@ -235,15 +277,89 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Exercise 1
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-generation-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Generation Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perceptron-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perceptron Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
             
               
                 
@@ -252,126 +368,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../data_generation/" class="md-nav__link">
+      <a href="../exercise2/" class="md-nav__link">
         
-  
-  
-  <span class="md-ellipsis">
-    Data Generation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../perceptron_implementation.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Perceptron Implementation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
   
   
   <span class="md-ellipsis">
     Exercise 2
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Exercise 2
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../exercise2/data_generation.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Data Generation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../exercise2/perceptron_implementation.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Perceptron Implementation
     
   </span>
   
@@ -409,6 +411,59 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-generation-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Generation Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perceptron-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perceptron Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -423,17 +478,50 @@
 
 
 
-<h1 id="exercise-1-perceptron-implementation-task">Exercise 1 — Perceptron Implementation Task</h1>
-<p>Implemente um perceptron single-layer do zero...</p>
+<h1 id="exercise-1">Exercise 1</h1>
+<h2 id="data-generation-task">Data Generation Task</h2>
+<p>In this exercise, we generated two classes of two-dimensional data points using multivariate normal distributions. Each class contains <strong>1000 samples</strong>, with the following parameters:</p>
 <ul>
-<li>Inicialize pesos w (vetor 2D) e bias b  </li>
-<li>Use learning rate η = 0.01  </li>
-<li>Regra de update: para cada amostra mal classificada (x, y):<br />
-  w = w + η * y * x<br />
-  b = b + η * y  </li>
-<li>Treinamento até convergência ou máximo de 100 épocas  </li>
-<li>Plote fronteira de decisão, acurácia por época, etc.</li>
+<li><strong>Class 0</strong>: mean = [1.5, 1.5], covariance matrix = [[0.5, 0], [0, 0.5]]  </li>
+<li><strong>Class 1</strong>: mean = [5, 5], covariance matrix = [[0.5, 0], [0, 0.5]]</li>
 </ul>
+<p>These parameters ensure that both classes have <strong>low internal variability</strong> (standard deviation √0.5 along each axis, no covariance between dimensions), resulting in relatively compact clusters.<br />
+The significant distance between the two mean vectors creates a <strong>clear separation between the classes</strong>, with only minimal overlap.</p>
+<p>The plot below illustrates this separation: points from Class 0 are concentrated around (1.5, 1.5), while points from Class 1 are centered at (5, 5). Colors are used to highlight the difference, making it evident that the classes are <strong>mostly linearly separable</strong>.</p>
+<p><img alt="Exercise 1 Data Plot" src="../Figure_1.png" /></p>
+<h2 id="perceptron-implementation">Perceptron Implementation</h2>
+<p>To classify the generated data, we implemented a <strong>single-layer perceptron from scratch</strong>, using only NumPy for basic linear algebra operations.<br />
+The perceptron was initialized with a 2D weight vector and a bias term. Training followed the <strong>perceptron learning rule</strong>:  </p>
+<ul>
+<li>For each misclassified sample, update the weights and bias proportionally to the learning rate.  </li>
+<li>Training stops when no misclassifications occur in a full pass through the dataset (convergence) or after 100 epochs.  </li>
+<li>Accuracy was tracked after each epoch to monitor convergence.  </li>
+</ul>
+<hr />
+<h2 id="results">Results</h2>
+<ul>
+<li>The perceptron converged <strong>very quickly</strong> due to the linear separability of the data.  </li>
+<li>Final accuracy was close to <strong>100%</strong>, with very few or no misclassified points.  </li>
+<li>The decision boundary cleanly separated most data points, confirming that the perceptron is an effective linear classifier in this case.  </li>
+</ul>
+<p>Converged at epoch 12
+Final weights: [0.19856224 0.17118283]
+Final bias: -1.2
+Final accuracy: 1.0</p>
+<hr />
+<h2 id="visualization">Visualization</h2>
+<p>The figure below shows the <strong>decision boundary</strong> overlaid on the data points.<br />
+- Blue points correspond to <strong>Class 0</strong><br />
+- Red points correspond to <strong>Class 1</strong><br />
+- Yellow-circled points (if any) indicate <strong>misclassifications</strong>  </p>
+<p><img alt="Perceptron Decision Boundary" src="../Figure_2.png" /></p>
+<p>Additionally, the <strong>training accuracy</strong> across epochs is plotted, illustrating the rapid convergence of the perceptron:  </p>
+<p><img alt="Training Accuracy" src="../Figure_3.png" /></p>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<p>Because the two classes were generated with <strong>well-separated means</strong> and <strong>low variance</strong>, they are almost perfectly linearly separable.<br />
+This allowed the perceptron to find a separating hyperplane within just a few epochs.  </p>
+<p>If the distributions had greater overlap, convergence would have taken longer, or the perceptron could have failed to reach 100% accuracy due to inherent non-linearity in the data.  </p>
 
 
 
