@@ -1,3 +1,4 @@
+
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -11,7 +12,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 
-site_name: Exercícios Perceptron
+site_name: Deep Learning Exercises
 site_url: https://guiparaiso.github.io/Deep-Learning-Pages/
 nav:
   - Home: index.md
@@ -23,5 +24,13 @@ nav:
   - Perceptron:
       - Exercise 1: perceptron/exercise1.md
       - Exercise 2: perceptron/exercise2.md
+  - MLP:
+      - Exercise 1: mlp/exercise1.md
+      - Exercise 2: mlp/ex2/exercise2.md
+      - Exercise 3: mlp/ex3/exercise3.md
+      - Exercise 4: mlp/ex4/exercise4.md
+  - VAE:
+      - Report: vae/vae.md 
+      - Code: vae/code.md
 theme:
   name: material

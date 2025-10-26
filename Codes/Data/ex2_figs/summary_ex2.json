@@ -1,0 +1,8 @@
+{
+  "explained_variance_ratio": [
+    0.48348497340951707,
+    0.16082837414785608
+  ],
+  "acc_logistic": 0.908,
+  "acc_mlp": 0.904
+}
