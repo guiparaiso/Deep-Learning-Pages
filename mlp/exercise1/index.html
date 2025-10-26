@@ -1,0 +1,2512 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/mlp/exercise1/">
+      
+      
+        <link rel="prev" href="../../perceptron/exercise2/">
+      
+      
+        <link rel="next" href="../ex2/exercise2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Exercise 1 - Exercícios Perceptron</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercise-1-manual-calculation-of-mlp-steps" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Exercícios Perceptron" class="md-header__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Exercícios Perceptron
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exercise 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Exercícios Perceptron" class="md-nav__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Exercícios Perceptron
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex1/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex2/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../perceptron/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../perceptron/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MLP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MLP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Given Values
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Forward Pass
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Forward Pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hidden-layer-pre-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Hidden Layer Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hidden-layer-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Hidden Layer Activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-output-pre-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-final-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Final Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-loss-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Loss Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-backward-pass-backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Backward Pass (Backpropagation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Backward Pass (Backpropagation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradient-of-loss-wrt-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Gradient of Loss w.r.t. Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gradient-wrt-output-pre-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Gradient w.r.t. Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-gradients-for-output-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gradients for Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-propagate-to-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Propagate to Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-gradient-wrt-hidden-pre-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Gradient w.r.t. Hidden Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-gradients-for-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 Gradients for Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-parameter-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Parameter Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Parameter Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-update-output-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Update Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-update-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Update Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary of Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-values_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Given Values
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-forward-pass_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Forward Pass
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Forward Pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hidden-layer-pre-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Hidden Layer Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hidden-layer-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Hidden Layer Activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-output-pre-activation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-final-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Final Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-loss-calculation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Loss Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-backward-pass-backpropagation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Backward Pass (Backpropagation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Backward Pass (Backpropagation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradient-of-loss-wrt-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Gradient of Loss w.r.t. Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gradient-wrt-output-pre-activation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Gradient w.r.t. Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-gradients-for-output-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gradients for Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-propagate-to-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Propagate to Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-gradient-wrt-hidden-pre-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Gradient w.r.t. Hidden Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-gradients-for-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 Gradients for Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-parameter-update_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Parameter Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Parameter Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-update-output-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Update Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-update-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Update Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-results_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary of Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradients_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-verification_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Verification
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ex2/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ex4/exercise4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VAE
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            VAE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vae/exercise1.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vae/exercise2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vae/exercise3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Given Values
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Forward Pass
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Forward Pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hidden-layer-pre-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Hidden Layer Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hidden-layer-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Hidden Layer Activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-output-pre-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-final-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Final Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-loss-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Loss Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-backward-pass-backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Backward Pass (Backpropagation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Backward Pass (Backpropagation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradient-of-loss-wrt-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Gradient of Loss w.r.t. Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gradient-wrt-output-pre-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Gradient w.r.t. Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-gradients-for-output-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gradients for Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-propagate-to-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Propagate to Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-gradient-wrt-hidden-pre-activations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Gradient w.r.t. Hidden Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-gradients-for-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 Gradients for Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-parameter-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Parameter Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Parameter Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-update-output-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Update Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-update-hidden-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Update Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary of Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Verification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-values_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Given Values
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-forward-pass_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Forward Pass
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Forward Pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-hidden-layer-pre-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Hidden Layer Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hidden-layer-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Hidden Layer Activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-output-pre-activation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-final-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Final Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-loss-calculation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Loss Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-backward-pass-backpropagation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Backward Pass (Backpropagation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Backward Pass (Backpropagation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradient-of-loss-wrt-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Gradient of Loss w.r.t. Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gradient-wrt-output-pre-activation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Gradient w.r.t. Output Pre-activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-gradients-for-output-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Gradients for Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-propagate-to-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Propagate to Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-gradient-wrt-hidden-pre-activations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Gradient w.r.t. Hidden Pre-activations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-gradients-for-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 Gradients for Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-parameter-update_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Parameter Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Parameter Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-update-output-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Update Output Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-update-hidden-layer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Update Hidden Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-results_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary of Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Pass
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradients_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-verification_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Verification
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="exercise-1-manual-calculation-of-mlp-steps">Exercise 1: Manual Calculation of MLP Steps<a class="headerlink" href="#exercise-1-manual-calculation-of-mlp-steps" title="Permanent link">&para;</a></h1>
+<h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
+<p>Consider a simple MLP with:
+- <strong>2 input features</strong>
+- <strong>1 hidden layer</strong> with 2 neurons
+- <strong>1 output neuron</strong>
+- <strong>Activation function</strong>: hyperbolic tangent (tanh) for both layers
+- <strong>Loss function</strong>: Mean Squared Error (MSE)</p>
+<h3 id="given-values">Given Values<a class="headerlink" href="#given-values" title="Permanent link">&para;</a></h3>
+<p><strong>Input and Output:</strong>
+- <span class="arithmatex">\(\mathbf{x} = [0.5, -0.2]\)</span>
+- <span class="arithmatex">\(y = 1.0\)</span></p>
+<p><strong>Hidden Layer Parameters:</strong>
+- <span class="arithmatex">\(\mathbf{W}^{(1)} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix}\)</span>
+- <span class="arithmatex">\(\mathbf{b}^{(1)} = [0.1, -0.2]\)</span></p>
+<p><strong>Output Layer Parameters:</strong>
+- <span class="arithmatex">\(\mathbf{W}^{(2)} = [0.5, -0.3]\)</span>
+- <span class="arithmatex">\(b^{(2)} = 0.2\)</span></p>
+<p><strong>Learning Rate:</strong>
+- <span class="arithmatex">\(\eta = 0.3\)</span></p>
+<hr />
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-forward-pass">Step 1: Forward Pass<a class="headerlink" href="#step-1-forward-pass" title="Permanent link">&para;</a></h3>
+<h4 id="11-hidden-layer-pre-activations">1.1 Hidden Layer Pre-activations<a class="headerlink" href="#11-hidden-layer-pre-activations" title="Permanent link">&para;</a></h4>
+<p>Calculate <span class="arithmatex">\(\mathbf{z}^{(1)} = \mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}\)</span></p>
+<div class="arithmatex">\[
+\mathbf{z}^{(1)} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix} \begin{bmatrix} 0.5 \\ -0.2 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix}
+\]</div>
+<p>For the first neuron:
+$$
+z_1^{(1)} = (0.3 \times 0.5) + (-0.1 \times -0.2) + 0.1 = 0.15 + 0.02 + 0.1 = 0.27
+$$</p>
+<p>For the second neuron:
+$$
+z_2^{(1)} = (0.2 \times 0.5) + (0.4 \times -0.2) + (-0.2) = 0.1 - 0.08 - 0.2 = -0.18
+$$</p>
+<p><strong>Result:</strong>
+$$
+\mathbf{z}^{(1)} = [0.2700, -0.1800]
+$$</p>
+<h4 id="12-hidden-layer-activations">1.2 Hidden Layer Activations<a class="headerlink" href="#12-hidden-layer-activations" title="Permanent link">&para;</a></h4>
+<p>Apply tanh activation: <span class="arithmatex">\(\mathbf{h}^{(1)} = \tanh(\mathbf{z}^{(1)})\)</span></p>
+<div class="arithmatex">\[
+h_1^{(1)} = \tanh(0.27) = 0.2636
+\]</div>
+<div class="arithmatex">\[
+h_2^{(1)} = \tanh(-0.18) = -0.1781
+\]</div>
+<p><strong>Result:</strong>
+$$
+\mathbf{h}^{(1)} = [0.2636, -0.1781]
+$$</p>
+<h4 id="13-output-pre-activation">1.3 Output Pre-activation<a class="headerlink" href="#13-output-pre-activation" title="Permanent link">&para;</a></h4>
+<p>Calculate <span class="arithmatex">\(u^{(2)} = \mathbf{W}^{(2)} \mathbf{h}^{(1)} + b^{(2)}\)</span></p>
+<div class="arithmatex">\[
+u^{(2)} = [0.5, -0.3] \begin{bmatrix} 0.2636 \\ -0.1781 \end{bmatrix} + 0.2
+\]</div>
+<div class="arithmatex">\[
+u^{(2)} = (0.5 \times 0.2636) + (-0.3 \times -0.1781) + 0.2
+\]</div>
+<div class="arithmatex">\[
+u^{(2)} = 0.1318 + 0.0534 + 0.2 = 0.3852
+\]</div>
+<p><strong>Result:</strong>
+$$
+u^{(2)} = 0.3852
+$$</p>
+<h4 id="14-final-output">1.4 Final Output<a class="headerlink" href="#14-final-output" title="Permanent link">&para;</a></h4>
+<p>Apply tanh activation: <span class="arithmatex">\(\hat{y} = \tanh(u^{(2)})\)</span></p>
+<div class="arithmatex">\[
+\hat{y} = \tanh(0.3852) = 0.3672
+\]</div>
+<p><strong>Result:</strong>
+$$
+\hat{y} = 0.3672
+$$</p>
+<hr />
+<h3 id="step-2-loss-calculation">Step 2: Loss Calculation<a class="headerlink" href="#step-2-loss-calculation" title="Permanent link">&para;</a></h3>
+<p>Calculate MSE loss: <span class="arithmatex">\(L = (y - \hat{y})^2\)</span></p>
+<div class="arithmatex">\[
+L = (1.0 - 0.3672)^2 = (0.6328)^2 = 0.4004
+\]</div>
+<p><strong>Result:</strong>
+$$
+L = 0.4004
+$$</p>
+<hr />
+<h3 id="step-3-backward-pass-backpropagation">Step 3: Backward Pass (Backpropagation)<a class="headerlink" href="#step-3-backward-pass-backpropagation" title="Permanent link">&para;</a></h3>
+<h4 id="31-gradient-of-loss-wrt-output">3.1 Gradient of Loss w.r.t. Output<a class="headerlink" href="#31-gradient-of-loss-wrt-output" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \hat{y}} = -2(y - \hat{y}) = -2(1.0 - 0.3672) = -2(0.6328) = -1.2655
+\]</div>
+<p><strong>Result:</strong>
+$$
+\frac{\partial L}{\partial \hat{y}} = -1.2655
+$$</p>
+<h4 id="32-gradient-wrt-output-pre-activation">3.2 Gradient w.r.t. Output Pre-activation<a class="headerlink" href="#32-gradient-wrt-output-pre-activation" title="Permanent link">&para;</a></h4>
+<p>Using the tanh derivative: <span class="arithmatex">\(\frac{d}{du}\tanh(u) = 1 - \tanh^2(u)\)</span></p>
+<div class="arithmatex">\[
+\frac{\partial \hat{y}}{\partial u^{(2)}} = 1 - \hat{y}^2 = 1 - (0.3672)^2 = 1 - 0.1349 = 0.8651
+\]</div>
+<p>Apply chain rule:
+$$
+\frac{\partial L}{\partial u^{(2)}} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial u^{(2)}} = -1.2655 \times 0.8651 = -1.0948
+$$</p>
+<p><strong>Result:</strong>
+$$
+\frac{\partial L}{\partial u^{(2)}} = -1.0948
+$$</p>
+<h4 id="33-gradients-for-output-layer">3.3 Gradients for Output Layer<a class="headerlink" href="#33-gradients-for-output-layer" title="Permanent link">&para;</a></h4>
+<p><strong>Gradient w.r.t. output weights:</strong>
+$$
+\frac{\partial L}{\partial \mathbf{W}^{(2)}} = \frac{\partial L}{\partial u^{(2)}} \times \mathbf{h}^{(1)} = -1.0948 \times [0.2636, -0.1781]
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(2)}} = [-0.2886, 0.1950]
+\]</div>
+<p><strong>Gradient w.r.t. output bias:</strong>
+$$
+\frac{\partial L}{\partial b^{(2)}} = \frac{\partial L}{\partial u^{(2)}} = -1.0948
+$$</p>
+<h4 id="34-propagate-to-hidden-layer">3.4 Propagate to Hidden Layer<a class="headerlink" href="#34-propagate-to-hidden-layer" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{h}^{(1)}} = \frac{\partial L}{\partial u^{(2)}} \times \mathbf{W}^{(2)} = -1.0948 \times [0.5, -0.3]
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{h}^{(1)}} = [-0.5474, 0.3284]
+\]</div>
+<h4 id="35-gradient-wrt-hidden-pre-activations">3.5 Gradient w.r.t. Hidden Pre-activations<a class="headerlink" href="#35-gradient-wrt-hidden-pre-activations" title="Permanent link">&para;</a></h4>
+<p>Calculate tanh derivative for hidden layer:
+$$
+\frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}} = 1 - (\mathbf{h}^{(1)})^2 = [1 - 0.2636^2, 1 - (-0.1781)^2]
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}} = [0.9305, 0.9683]
+\]</div>
+<p>Apply chain rule:
+$$
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = \frac{\partial L}{\partial \mathbf{h}^{(1)}} \odot \frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}}
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5474, 0.3284] \odot [0.9305, 0.9683]
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5094, 0.3180]
+\]</div>
+<h4 id="36-gradients-for-hidden-layer">3.6 Gradients for Hidden Layer<a class="headerlink" href="#36-gradients-for-hidden-layer" title="Permanent link">&para;</a></h4>
+<p><strong>Gradient w.r.t. hidden weights (outer product):</strong>
+$$
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \frac{\partial L}{\partial \mathbf{z}^{(1)}} \otimes \mathbf{x}
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \begin{bmatrix} -0.5094 \\ 0.3180 \end{bmatrix} \otimes \begin{bmatrix} 0.5 \\ -0.2 \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \begin{bmatrix} -0.2547 &amp; 0.1019 \\ 0.1590 &amp; -0.0636 \end{bmatrix}
+\]</div>
+<p><strong>Gradient w.r.t. hidden bias:</strong>
+$$
+\frac{\partial L}{\partial \mathbf{b}^{(1)}} = \frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5094, 0.3180]
+$$</p>
+<hr />
+<h3 id="step-4-parameter-update">Step 4: Parameter Update<a class="headerlink" href="#step-4-parameter-update" title="Permanent link">&para;</a></h3>
+<p>Using gradient descent: <span class="arithmatex">\(\theta_{\text{new}} = \theta_{\text{old}} - \eta \frac{\partial L}{\partial \theta}\)</span></p>
+<h4 id="41-update-output-layer">4.1 Update Output Layer<a class="headerlink" href="#41-update-output-layer" title="Permanent link">&para;</a></h4>
+<p><strong>Update output weights:</strong>
+$$
+\mathbf{W}^{(2)}_{\text{new}} = [0.5, -0.3] - 0.3 \times [-0.2886, 0.1950]
+$$</p>
+<div class="arithmatex">\[
+\mathbf{W}^{(2)}_{\text{new}} = [0.5, -0.3] - [-0.0866, 0.0585]
+\]</div>
+<div class="arithmatex">\[
+\mathbf{W}^{(2)}_{\text{new}} = [0.5866, -0.3585]
+\]</div>
+<p><strong>Update output bias:</strong>
+$$
+b^{(2)}_{\text{new}} = 0.2 - 0.3 \times (-1.0948) = 0.2 + 0.3284 = 0.5284
+$$</p>
+<h4 id="42-update-hidden-layer">4.2 Update Hidden Layer<a class="headerlink" href="#42-update-hidden-layer" title="Permanent link">&para;</a></h4>
+<p><strong>Update hidden weights:</strong>
+$$
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3 &amp; -0.1 \ 0.2 &amp; 0.4 \end{bmatrix} - 0.3 \times \begin{bmatrix} -0.2547 &amp; 0.1019 \ 0.1590 &amp; -0.0636 \end{bmatrix}
+$$</p>
+<div class="arithmatex">\[
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix} - \begin{bmatrix} -0.0764 &amp; 0.0306 \\ 0.0477 &amp; -0.0191 \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3764 &amp; -0.1306 \\ 0.1523 &amp; 0.4191 \end{bmatrix}
+\]</div>
+<p><strong>Update hidden bias:</strong>
+$$
+\mathbf{b}^{(1)}_{\text{new}} = [0.1, -0.2] - 0.3 \times [-0.5094, 0.3180]
+$$</p>
+<div class="arithmatex">\[
+\mathbf{b}^{(1)}_{\text{new}} = [0.1, -0.2] - [-0.1528, 0.0954]
+\]</div>
+<div class="arithmatex">\[
+\mathbf{b}^{(1)}_{\text{new}} = [0.2528, -0.2954]
+\]</div>
+<hr />
+<h2 id="summary-of-results">Summary of Results<a class="headerlink" href="#summary-of-results" title="Permanent link">&para;</a></h2>
+<h3 id="forward-pass">Forward Pass<a class="headerlink" href="#forward-pass" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbf{z}^{(1)}\)</span></td>
+<td><span class="arithmatex">\([0.2700, -0.1800]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{h}^{(1)}\)</span></td>
+<td><span class="arithmatex">\([0.2636, -0.1781]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(u^{(2)}\)</span></td>
+<td><span class="arithmatex">\(0.3852\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat{y}\)</span></td>
+<td><span class="arithmatex">\(0.3672\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="loss">Loss<a class="headerlink" href="#loss" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L = 0.4004\]</div>
+<h3 id="gradients">Gradients<a class="headerlink" href="#gradients" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Gradient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{W}^{(2)}}\)</span></td>
+<td><span class="arithmatex">\([-0.2886, 0.1950]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial b^{(2)}}\)</span></td>
+<td><span class="arithmatex">\(-1.0948\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{W}^{(1)}}\)</span></td>
+<td><span class="arithmatex">\(\begin{bmatrix} -0.2547 &amp; 0.1019 \\ 0.1590 &amp; -0.0636 \end{bmatrix}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{b}^{(1)}}\)</span></td>
+<td><span class="arithmatex">\([-0.5094, 0.3180]\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="updated-parameters">Updated Parameters<a class="headerlink" href="#updated-parameters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>New Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbf{W}^{(2)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\([0.5866, -0.3585]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b^{(2)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\(0.5284\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{W}^{(1)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\(\begin{bmatrix} 0.3764 &amp; -0.1306 \\ 0.1523 &amp; 0.4191 \end{bmatrix}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{b}^{(1)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\([0.2528, -0.2954]\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="code-verification">Code Verification<a class="headerlink" href="#code-verification" title="Permanent link">&para;</a></h2>
+<p>The calculations above were verified using Python/NumPy:</p>
+<pre><code class="language-python">import numpy as np
+
+# Given values
+x = np.array([0.5, -0.2])
+y = 1.0
+W1 = np.array([[0.3, -0.1], [0.2, 0.4]])
+b1 = np.array([0.1, -0.2])
+W2 = np.array([0.5, -0.3])
+b2 = 0.2
+eta = 0.3
+
+# Forward pass
+z1 = W1 @ x + b1
+h1 = np.tanh(z1)
+u2 = W2 @ h1 + b2
+y_hat = np.tanh(u2)
+loss = (y - y_hat)**2
+
+# Backward pass
+dL_dyhat = -2 * (y - y_hat)
+dL_du2 = dL_dyhat * (1 - y_hat**2)
+dL_dW2 = dL_du2 * h1
+dL_db2 = dL_du2
+dL_dh1 = dL_du2 * W2
+dL_dz1 = dL_dh1 * (1 - h1**2)
+dL_dW1 = np.outer(dL_dz1, x)
+dL_db1 = dL_dz1
+
+# Parameter update
+W2_new = W2 - eta * dL_dW2
+b2_new = b2 - eta * dL_db2
+W1_new = W1 - eta * dL_dW1
+b1_new = b1 - eta * dL_db1
+
+print(f&quot;Loss: {loss:.4f}&quot;)
+print(f&quot;Updated W2: {W2_new}&quot;)
+print(f&quot;Updated b2: {b2_new:.4f}&quot;)
+</code></pre>
+<p>All numerical values match the manual calculations with precision to 4 decimal places.# Exercise 1: Manual Calculation of MLP Steps</p>
+<h2 id="problem-statement_1">Problem Statement<a class="headerlink" href="#problem-statement_1" title="Permanent link">&para;</a></h2>
+<p>Consider a simple MLP with:
+- <strong>2 input features</strong>
+- <strong>1 hidden layer</strong> with 2 neurons
+- <strong>1 output neuron</strong>
+- <strong>Activation function</strong>: hyperbolic tangent (tanh) for both layers
+- <strong>Loss function</strong>: Mean Squared Error (MSE)</p>
+<h3 id="given-values_1">Given Values<a class="headerlink" href="#given-values_1" title="Permanent link">&para;</a></h3>
+<p><strong>Input and Output:</strong>
+- <span class="arithmatex">\(\mathbf{x} = [0.5, -0.2]\)</span>
+- <span class="arithmatex">\(y = 1.0\)</span></p>
+<p><strong>Hidden Layer Parameters:</strong>
+- <span class="arithmatex">\(\mathbf{W}^{(1)} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix}\)</span>
+- <span class="arithmatex">\(\mathbf{b}^{(1)} = [0.1, -0.2]\)</span></p>
+<p><strong>Output Layer Parameters:</strong>
+- <span class="arithmatex">\(\mathbf{W}^{(2)} = [0.5, -0.3]\)</span>
+- <span class="arithmatex">\(b^{(2)} = 0.2\)</span></p>
+<p><strong>Learning Rate:</strong>
+- <span class="arithmatex">\(\eta = 0.3\)</span></p>
+<hr />
+<h2 id="solution_1">Solution<a class="headerlink" href="#solution_1" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-forward-pass_1">Step 1: Forward Pass<a class="headerlink" href="#step-1-forward-pass_1" title="Permanent link">&para;</a></h3>
+<h4 id="11-hidden-layer-pre-activations_1">1.1 Hidden Layer Pre-activations<a class="headerlink" href="#11-hidden-layer-pre-activations_1" title="Permanent link">&para;</a></h4>
+<p>Calculate <span class="arithmatex">\(\mathbf{z}^{(1)} = \mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}\)</span></p>
+<div class="arithmatex">\[
+\mathbf{z}^{(1)} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix} \begin{bmatrix} 0.5 \\ -0.2 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix}
+\]</div>
+<p>For the first neuron:
+$$
+z_1^{(1)} = (0.3 \times 0.5) + (-0.1 \times -0.2) + 0.1 = 0.15 + 0.02 + 0.1 = 0.27
+$$</p>
+<p>For the second neuron:
+$$
+z_2^{(1)} = (0.2 \times 0.5) + (0.4 \times -0.2) + (-0.2) = 0.1 - 0.08 - 0.2 = -0.18
+$$</p>
+<p><strong>Result:</strong>
+$$
+\mathbf{z}^{(1)} = [0.2700, -0.1800]
+$$</p>
+<h4 id="12-hidden-layer-activations_1">1.2 Hidden Layer Activations<a class="headerlink" href="#12-hidden-layer-activations_1" title="Permanent link">&para;</a></h4>
+<p>Apply tanh activation: <span class="arithmatex">\(\mathbf{h}^{(1)} = \tanh(\mathbf{z}^{(1)})\)</span></p>
+<div class="arithmatex">\[
+h_1^{(1)} = \tanh(0.27) = 0.2636
+\]</div>
+<div class="arithmatex">\[
+h_2^{(1)} = \tanh(-0.18) = -0.1781
+\]</div>
+<p><strong>Result:</strong>
+$$
+\mathbf{h}^{(1)} = [0.2636, -0.1781]
+$$</p>
+<h4 id="13-output-pre-activation_1">1.3 Output Pre-activation<a class="headerlink" href="#13-output-pre-activation_1" title="Permanent link">&para;</a></h4>
+<p>Calculate <span class="arithmatex">\(u^{(2)} = \mathbf{W}^{(2)} \mathbf{h}^{(1)} + b^{(2)}\)</span></p>
+<div class="arithmatex">\[
+u^{(2)} = [0.5, -0.3] \begin{bmatrix} 0.2636 \\ -0.1781 \end{bmatrix} + 0.2
+\]</div>
+<div class="arithmatex">\[
+u^{(2)} = (0.5 \times 0.2636) + (-0.3 \times -0.1781) + 0.2
+\]</div>
+<div class="arithmatex">\[
+u^{(2)} = 0.1318 + 0.0534 + 0.2 = 0.3852
+\]</div>
+<p><strong>Result:</strong>
+$$
+u^{(2)} = 0.3852
+$$</p>
+<h4 id="14-final-output_1">1.4 Final Output<a class="headerlink" href="#14-final-output_1" title="Permanent link">&para;</a></h4>
+<p>Apply tanh activation: <span class="arithmatex">\(\hat{y} = \tanh(u^{(2)})\)</span></p>
+<div class="arithmatex">\[
+\hat{y} = \tanh(0.3852) = 0.3672
+\]</div>
+<p><strong>Result:</strong>
+$$
+\hat{y} = 0.3672
+$$</p>
+<hr />
+<h3 id="step-2-loss-calculation_1">Step 2: Loss Calculation<a class="headerlink" href="#step-2-loss-calculation_1" title="Permanent link">&para;</a></h3>
+<p>Calculate MSE loss: <span class="arithmatex">\(L = (y - \hat{y})^2\)</span></p>
+<div class="arithmatex">\[
+L = (1.0 - 0.3672)^2 = (0.6328)^2 = 0.4004
+\]</div>
+<p><strong>Result:</strong>
+$$
+L = 0.4004
+$$</p>
+<hr />
+<h3 id="step-3-backward-pass-backpropagation_1">Step 3: Backward Pass (Backpropagation)<a class="headerlink" href="#step-3-backward-pass-backpropagation_1" title="Permanent link">&para;</a></h3>
+<h4 id="31-gradient-of-loss-wrt-output_1">3.1 Gradient of Loss w.r.t. Output<a class="headerlink" href="#31-gradient-of-loss-wrt-output_1" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \hat{y}} = -2(y - \hat{y}) = -2(1.0 - 0.3672) = -2(0.6328) = -1.2655
+\]</div>
+<p><strong>Result:</strong>
+$$
+\frac{\partial L}{\partial \hat{y}} = -1.2655
+$$</p>
+<h4 id="32-gradient-wrt-output-pre-activation_1">3.2 Gradient w.r.t. Output Pre-activation<a class="headerlink" href="#32-gradient-wrt-output-pre-activation_1" title="Permanent link">&para;</a></h4>
+<p>Using the tanh derivative: <span class="arithmatex">\(\frac{d}{du}\tanh(u) = 1 - \tanh^2(u)\)</span></p>
+<div class="arithmatex">\[
+\frac{\partial \hat{y}}{\partial u^{(2)}} = 1 - \hat{y}^2 = 1 - (0.3672)^2 = 1 - 0.1349 = 0.8651
+\]</div>
+<p>Apply chain rule:
+$$
+\frac{\partial L}{\partial u^{(2)}} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial u^{(2)}} = -1.2655 \times 0.8651 = -1.0948
+$$</p>
+<p><strong>Result:</strong>
+$$
+\frac{\partial L}{\partial u^{(2)}} = -1.0948
+$$</p>
+<h4 id="33-gradients-for-output-layer_1">3.3 Gradients for Output Layer<a class="headerlink" href="#33-gradients-for-output-layer_1" title="Permanent link">&para;</a></h4>
+<p><strong>Gradient w.r.t. output weights:</strong>
+$$
+\frac{\partial L}{\partial \mathbf{W}^{(2)}} = \frac{\partial L}{\partial u^{(2)}} \times \mathbf{h}^{(1)} = -1.0948 \times [0.2636, -0.1781]
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(2)}} = [-0.2886, 0.1950]
+\]</div>
+<p><strong>Gradient w.r.t. output bias:</strong>
+$$
+\frac{\partial L}{\partial b^{(2)}} = \frac{\partial L}{\partial u^{(2)}} = -1.0948
+$$</p>
+<h4 id="34-propagate-to-hidden-layer_1">3.4 Propagate to Hidden Layer<a class="headerlink" href="#34-propagate-to-hidden-layer_1" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{h}^{(1)}} = \frac{\partial L}{\partial u^{(2)}} \times \mathbf{W}^{(2)} = -1.0948 \times [0.5, -0.3]
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{h}^{(1)}} = [-0.5474, 0.3284]
+\]</div>
+<h4 id="35-gradient-wrt-hidden-pre-activations_1">3.5 Gradient w.r.t. Hidden Pre-activations<a class="headerlink" href="#35-gradient-wrt-hidden-pre-activations_1" title="Permanent link">&para;</a></h4>
+<p>Calculate tanh derivative for hidden layer:
+$$
+\frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}} = 1 - (\mathbf{h}^{(1)})^2 = [1 - 0.2636^2, 1 - (-0.1781)^2]
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}} = [0.9305, 0.9683]
+\]</div>
+<p>Apply chain rule:
+$$
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = \frac{\partial L}{\partial \mathbf{h}^{(1)}} \odot \frac{\partial \mathbf{h}^{(1)}}{\partial \mathbf{z}^{(1)}}
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5474, 0.3284] \odot [0.9305, 0.9683]
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5094, 0.3180]
+\]</div>
+<h4 id="36-gradients-for-hidden-layer_1">3.6 Gradients for Hidden Layer<a class="headerlink" href="#36-gradients-for-hidden-layer_1" title="Permanent link">&para;</a></h4>
+<p><strong>Gradient w.r.t. hidden weights (outer product):</strong>
+$$
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \frac{\partial L}{\partial \mathbf{z}^{(1)}} \otimes \mathbf{x}
+$$</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \begin{bmatrix} -0.5094 \\ 0.3180 \end{bmatrix} \otimes \begin{bmatrix} 0.5 \\ -0.2 \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial \mathbf{W}^{(1)}} = \begin{bmatrix} -0.2547 &amp; 0.1019 \\ 0.1590 &amp; -0.0636 \end{bmatrix}
+\]</div>
+<p><strong>Gradient w.r.t. hidden bias:</strong>
+$$
+\frac{\partial L}{\partial \mathbf{b}^{(1)}} = \frac{\partial L}{\partial \mathbf{z}^{(1)}} = [-0.5094, 0.3180]
+$$</p>
+<hr />
+<h3 id="step-4-parameter-update_1">Step 4: Parameter Update<a class="headerlink" href="#step-4-parameter-update_1" title="Permanent link">&para;</a></h3>
+<p>Using gradient descent: <span class="arithmatex">\(\theta_{\text{new}} = \theta_{\text{old}} - \eta \frac{\partial L}{\partial \theta}\)</span></p>
+<h4 id="41-update-output-layer_1">4.1 Update Output Layer<a class="headerlink" href="#41-update-output-layer_1" title="Permanent link">&para;</a></h4>
+<p><strong>Update output weights:</strong>
+$$
+\mathbf{W}^{(2)}_{\text{new}} = [0.5, -0.3] - 0.3 \times [-0.2886, 0.1950]
+$$</p>
+<div class="arithmatex">\[
+\mathbf{W}^{(2)}_{\text{new}} = [0.5, -0.3] - [-0.0866, 0.0585]
+\]</div>
+<div class="arithmatex">\[
+\mathbf{W}^{(2)}_{\text{new}} = [0.5866, -0.3585]
+\]</div>
+<p><strong>Update output bias:</strong>
+$$
+b^{(2)}_{\text{new}} = 0.2 - 0.3 \times (-1.0948) = 0.2 + 0.3284 = 0.5284
+$$</p>
+<h4 id="42-update-hidden-layer_1">4.2 Update Hidden Layer<a class="headerlink" href="#42-update-hidden-layer_1" title="Permanent link">&para;</a></h4>
+<p><strong>Update hidden weights:</strong>
+$$
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3 &amp; -0.1 \ 0.2 &amp; 0.4 \end{bmatrix} - 0.3 \times \begin{bmatrix} -0.2547 &amp; 0.1019 \ 0.1590 &amp; -0.0636 \end{bmatrix}
+$$</p>
+<div class="arithmatex">\[
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3 &amp; -0.1 \\ 0.2 &amp; 0.4 \end{bmatrix} - \begin{bmatrix} -0.0764 &amp; 0.0306 \\ 0.0477 &amp; -0.0191 \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{W}^{(1)}_{\text{new}} = \begin{bmatrix} 0.3764 &amp; -0.1306 \\ 0.1523 &amp; 0.4191 \end{bmatrix}
+\]</div>
+<p><strong>Update hidden bias:</strong>
+$$
+\mathbf{b}^{(1)}_{\text{new}} = [0.1, -0.2] - 0.3 \times [-0.5094, 0.3180]
+$$</p>
+<div class="arithmatex">\[
+\mathbf{b}^{(1)}_{\text{new}} = [0.1, -0.2] - [-0.1528, 0.0954]
+\]</div>
+<div class="arithmatex">\[
+\mathbf{b}^{(1)}_{\text{new}} = [0.2528, -0.2954]
+\]</div>
+<hr />
+<h2 id="summary-of-results_1">Summary of Results<a class="headerlink" href="#summary-of-results_1" title="Permanent link">&para;</a></h2>
+<h3 id="forward-pass_1">Forward Pass<a class="headerlink" href="#forward-pass_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbf{z}^{(1)}\)</span></td>
+<td><span class="arithmatex">\([0.2700, -0.1800]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{h}^{(1)}\)</span></td>
+<td><span class="arithmatex">\([0.2636, -0.1781]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(u^{(2)}\)</span></td>
+<td><span class="arithmatex">\(0.3852\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat{y}\)</span></td>
+<td><span class="arithmatex">\(0.3672\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="loss_1">Loss<a class="headerlink" href="#loss_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[L = 0.4004\]</div>
+<h3 id="gradients_1">Gradients<a class="headerlink" href="#gradients_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Gradient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{W}^{(2)}}\)</span></td>
+<td><span class="arithmatex">\([-0.2886, 0.1950]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial b^{(2)}}\)</span></td>
+<td><span class="arithmatex">\(-1.0948\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{W}^{(1)}}\)</span></td>
+<td><span class="arithmatex">\(\begin{bmatrix} -0.2547 &amp; 0.1019 \\ 0.1590 &amp; -0.0636 \end{bmatrix}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial \mathbf{b}^{(1)}}\)</span></td>
+<td><span class="arithmatex">\([-0.5094, 0.3180]\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="updated-parameters_1">Updated Parameters<a class="headerlink" href="#updated-parameters_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>New Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbf{W}^{(2)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\([0.5866, -0.3585]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b^{(2)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\(0.5284\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{W}^{(1)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\(\begin{bmatrix} 0.3764 &amp; -0.1306 \\ 0.1523 &amp; 0.4191 \end{bmatrix}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{b}^{(1)}_{\text{new}}\)</span></td>
+<td><span class="arithmatex">\([0.2528, -0.2954]\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="code-verification_1">Code Verification<a class="headerlink" href="#code-verification_1" title="Permanent link">&para;</a></h2>
+<p>The calculations above were verified using Python/NumPy:</p>
+<pre><code class="language-python">import numpy as np
+
+# Given values
+x = np.array([0.5, -0.2])
+y = 1.0
+W1 = np.array([[0.3, -0.1], [0.2, 0.4]])
+b1 = np.array([0.1, -0.2])
+W2 = np.array([0.5, -0.3])
+b2 = 0.2
+eta = 0.3
+
+# Forward pass
+z1 = W1 @ x + b1
+h1 = np.tanh(z1)
+u2 = W2 @ h1 + b2
+y_hat = np.tanh(u2)
+loss = (y - y_hat)**2
+
+# Backward pass
+dL_dyhat = -2 * (y - y_hat)
+dL_du2 = dL_dyhat * (1 - y_hat**2)
+dL_dW2 = dL_du2 * h1
+dL_db2 = dL_du2
+dL_dh1 = dL_du2 * W2
+dL_dz1 = dL_dh1 * (1 - h1**2)
+dL_dW1 = np.outer(dL_dz1, x)
+dL_db1 = dL_dz1
+
+# Parameter update
+W2_new = W2 - eta * dL_dW2
+b2_new = b2 - eta * dL_db2
+W1_new = W1 - eta * dL_dW1
+b1_new = b1 - eta * dL_db1
+
+print(f&quot;Loss: {loss:.4f}&quot;)
+print(f&quot;Updated W2: {W2_new}&quot;)
+print(f&quot;Updated b2: {b2_new:.4f}&quot;)
+</code></pre>
+<p>All numerical values match the manual calculations with precision to 4 decimal places.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1689 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/mlp/ex2/exercise2/">
+      
+      
+        <link rel="prev" href="../../exercise1/">
+      
+      
+        <link rel="next" href="../../ex3/exercise3/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Exercise 2 - Exercícios Perceptron</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercise-2-binary-classification-with-synthetic-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Exercícios Perceptron" class="md-header__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Exercícios Perceptron
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exercise 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Exercícios Perceptron" class="md-nav__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Exercícios Perceptron
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data/ex1/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data/ex2/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../data/ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perceptron/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perceptron/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MLP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MLP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlp-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      MLP Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MLP Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Rationale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hyperparameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-loss-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Loss Curve
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusion Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Report
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision Boundary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observations-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observations and Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Observations and Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#potential-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Potential Improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges-addressed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges Addressed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ex4/exercise4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VAE
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            VAE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../vae/exercise1.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../vae/exercise2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../vae/exercise3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlp-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      MLP Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MLP Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Rationale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hyperparameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-loss-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Loss Curve
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusion Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Report
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision Boundary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loss-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loss Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observations-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observations and Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Observations and Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#potential-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Potential Improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#challenges-addressed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges Addressed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="exercise-2-binary-classification-with-synthetic-data">Exercise 2: Binary Classification with Synthetic Data<a class="headerlink" href="#exercise-2-binary-classification-with-synthetic-data" title="Permanent link">&para;</a></h1>
+<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>Implement an MLP from scratch (using only NumPy) to perform binary classification on a synthetic dataset with the following specifications:</p>
+<ul>
+<li><strong>1000 samples</strong></li>
+<li><strong>2 classes</strong></li>
+<li><strong>2 features</strong> (for visualization)</li>
+<li><strong>1 cluster for Class 0</strong></li>
+<li><strong>2 clusters for Class 1</strong></li>
+</ul>
+<hr />
+<h2 id="dataset-generation">Dataset Generation<a class="headerlink" href="#dataset-generation" title="Permanent link">&para;</a></h2>
+<h3 id="strategy">Strategy<a class="headerlink" href="#strategy" title="Permanent link">&para;</a></h3>
+<p>Since <code>make_classification</code> applies the same number of clusters to all classes by default, we generate each class separately and then combine them:</p>
+<pre><code class="language-python">from sklearn.datasets import make_classification
+import numpy as np
+
+# Class 0: 1 cluster (400 samples)
+X_class0, y_class0 = make_classification(
+    n_samples=400,
+    n_features=2,
+    n_informative=2,
+    n_redundant=0,
+    n_clusters_per_class=1,
+    n_classes=1,
+    random_state=42,
+    flip_y=0.05,
+    class_sep=1.5
+)
+y_class0 = np.zeros(len(y_class0))
+
+# Class 1: 2 clusters (600 samples)
+X_class1, y_class1 = make_classification(
+    n_samples=600,
+    n_features=2,
+    n_informative=2,
+    n_redundant=0,
+    n_clusters_per_class=2,
+    n_classes=1,
+    random_state=24,
+    flip_y=0.05,
+    class_sep=1.5
+)
+y_class1 = np.ones(len(y_class1))
+
+# Combine and shuffle
+X = np.vstack([X_class0, X_class1])
+y = np.hstack([y_class0, y_class1])
+shuffle_idx = np.random.RandomState(42).permutation(len(y))
+X = X[shuffle_idx]
+y = y[shuffle_idx]
+</code></pre>
+<h3 id="dataset-characteristics">Dataset Characteristics<a class="headerlink" href="#dataset-characteristics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Total samples</strong>: 1000</li>
+<li><strong>Class 0</strong>: 400 samples (1 cluster)</li>
+<li><strong>Class 1</strong>: 600 samples (2 clusters)</li>
+<li><strong>Features</strong>: 2 (fully informative)</li>
+<li><strong>Train/Test split</strong>: 80/20 (800/200 samples)</li>
+</ul>
+<h3 id="data-visualization">Data Visualization<a class="headerlink" href="#data-visualization" title="Permanent link">&para;</a></h3>
+<p><img alt="Data Distribution" src="../exercise2_data.png" /></p>
+<p>The visualization shows the distinctive pattern of Class 0 (blue) forming a single compact cluster, while Class 1 (red) forms two separate clusters, making this a challenging binary classification problem.</p>
+<hr />
+<h2 id="mlp-architecture">MLP Architecture<a class="headerlink" href="#mlp-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="network-design">Network Design<a class="headerlink" href="#network-design" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">from mlp import MLP
+
+mlp = MLP(
+    layer_sizes=[2, 8, 4, 1],
+    activation='tanh',
+    learning_rate=0.01
+)
+</code></pre>
+<p><strong>Architecture breakdown:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Type</th>
+<th>Neurons</th>
+<th>Activation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>-</td>
+<td>2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Hidden 1</td>
+<td>Dense</td>
+<td>8</td>
+<td>tanh</td>
+</tr>
+<tr>
+<td>Hidden 2</td>
+<td>Dense</td>
+<td>4</td>
+<td>tanh</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Dense</td>
+<td>1</td>
+<td>tanh</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total parameters</strong>: 
+- Hidden 1: <span class="arithmatex">\((2 \times 8) + 8 = 24\)</span> parameters
+- Hidden 2: <span class="arithmatex">\((8 \times 4) + 4 = 36\)</span> parameters
+- Output: <span class="arithmatex">\((4 \times 1) + 1 = 5\)</span> parameters
+- <strong>Total</strong>: 65 parameters</p>
+<h3 id="design-rationale">Design Rationale<a class="headerlink" href="#design-rationale" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Two hidden layers</strong>: Provides sufficient capacity to learn the non-linear decision boundary required to separate the 2 clusters of Class 1 from the single cluster of Class 0</li>
+<li><strong>Decreasing neuron count</strong> (8 → 4 → 1): Funnel architecture that progressively abstracts features</li>
+<li><strong>tanh activation</strong>: Allows for negative values and has stronger gradients than sigmoid</li>
+<li><strong>Single output neuron</strong>: Binary classification using threshold at 0.5</li>
+</ol>
+<hr />
+<h2 id="training-process">Training Process<a class="headerlink" href="#training-process" title="Permanent link">&para;</a></h2>
+<h3 id="hyperparameters">Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">mlp.train(
+    X_train, 
+    y_train, 
+    epochs=200, 
+    batch_size=32, 
+    verbose=True
+)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Epochs</td>
+<td>200</td>
+<td>Sufficient for convergence</td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>32</td>
+<td>Mini-batch gradient descent for stability</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>0.01</td>
+<td>Conservative rate to avoid overshooting</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>MSE</td>
+<td>Mean Squared Error for binary output</td>
+</tr>
+</tbody>
+</table>
+<h3 id="training-loss-curve">Training Loss Curve<a class="headerlink" href="#training-loss-curve" title="Permanent link">&para;</a></h3>
+<p><img alt="Training Loss" src="../exercise2_loss.png" /></p>
+<p>The loss curve shows:
+- <strong>Rapid initial descent</strong>: Quick learning in early epochs
+- <strong>Smooth convergence</strong>: Stable training without oscillations
+- <strong>Final loss</strong>: ~0.01, indicating good fit</p>
+<hr />
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<h3 id="performance-metrics">Performance Metrics<a class="headerlink" href="#performance-metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Training Set</th>
+<th>Test Set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Accuracy</strong></td>
+<td>99.00%</td>
+<td>98.50%</td>
+</tr>
+<tr>
+<td><strong>Loss</strong></td>
+<td>0.0089</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="confusion-matrix">Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permanent link">&para;</a></h3>
+<p><img alt="Confusion Matrix" src="../exercise2_confusion_matrix.png" /></p>
+<p><strong>Test Set Confusion Matrix:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Predicted 0</th>
+<th>Predicted 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actual 0</strong></td>
+<td>78</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>Actual 1</strong></td>
+<td>1</td>
+<td>119</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analysis:</strong>
+- <strong>True Negatives (TN)</strong>: 78
+- <strong>False Positives (FP)</strong>: 2
+- <strong>False Negatives (FN)</strong>: 1
+- <strong>True Positives (TP)</strong>: 119
+- <strong>Precision (Class 1)</strong>: 119/(119+2) = 98.35%
+- <strong>Recall (Class 1)</strong>: 119/(119+1) = 99.17%</p>
+<h3 id="classification-report">Classification Report<a class="headerlink" href="#classification-report" title="Permanent link">&para;</a></h3>
+<pre><code>              precision    recall  f1-score   support
+
+     Class 0       0.99      0.97      0.98        80
+     Class 1       0.98      0.99      0.99       120
+
+    accuracy                           0.98       200
+   macro avg       0.99      0.98      0.98       200
+weighted avg       0.99      0.98      0.98       200
+</code></pre>
+<h3 id="decision-boundary">Decision Boundary<a class="headerlink" href="#decision-boundary" title="Permanent link">&para;</a></h3>
+<p><img alt="Decision Boundary" src="../exercise2_decision_boundary.png" /></p>
+<p>The decision boundary visualization demonstrates:
+- <strong>Non-linear separation</strong>: The MLP successfully learned a complex boundary
+- <strong>Cluster separation</strong>: Correctly distinguishes the single cluster of Class 0 from the two clusters of Class 1
+- <strong>Generalization</strong>: Clean boundaries without excessive overfitting</p>
+<h3 id="prediction-visualization">Prediction Visualization<a class="headerlink" href="#prediction-visualization" title="Permanent link">&para;</a></h3>
+<p><img alt="Predictions Comparison" src="../exercise2_predictions.png" /></p>
+<p><strong>Left</strong>: Ground truth labels<br />
+<strong>Right</strong>: MLP predictions with misclassified points marked with yellow X</p>
+<p>Only 3 misclassified samples out of 200 test samples, demonstrating excellent generalization.</p>
+<hr />
+<h2 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="key-components">Key Components<a class="headerlink" href="#key-components" title="Permanent link">&para;</a></h3>
+<p>The MLP implementation (from <code>mlp.py</code>) includes:</p>
+<ol>
+<li>
+<p><strong>Forward Pass</strong>:
+   <code>python
+   def forward(self, X):
+       activations = [X]
+       for i in range(self.num_layers - 1):
+           z = self.weights[i] @ activations[-1] + self.biases[i]
+           a = self._activation_function(z)
+           activations.append(a)
+       return activations</code></p>
+</li>
+<li>
+<p><strong>Backward Pass</strong> (Backpropagation):
+   ```python
+   def backward(self, X, y, activations):
+       # Compute output gradient
+       delta = -(y - y_pred) * activation_derivative(y_pred)</p>
+<p># Backpropagate through layers
+   for i in reversed(range(self.num_layers - 1)):
+       gradients_w[i] = delta @ activations[i].T
+       gradients_b[i] = np.sum(delta, axis=1)
+       delta = weights[i].T @ delta * activation_derivative(activations[i])
+   ```</p>
+</li>
+<li>
+<p><strong>Parameter Update</strong> (Gradient Descent):
+   <code>python
+   for i in range(self.num_layers - 1):
+       self.weights[i] -= learning_rate * gradients_w[i]
+       self.biases[i] -= learning_rate * gradients_b[i]</code></p>
+</li>
+</ol>
+<h3 id="loss-function">Loss Function<a class="headerlink" href="#loss-function" title="Permanent link">&para;</a></h3>
+<p>Mean Squared Error (MSE):
+<span class="arithmatex">\(<span class="arithmatex">\(L = \frac{1}{m} \sum_{i=1}^{m} (y_i - \hat{y}_i)^2\)</span>\)</span></p>
+<p>Where:
+- <span class="arithmatex">\(m\)</span> = number of samples
+- <span class="arithmatex">\(y_i\)</span> = true label
+- <span class="arithmatex">\(\hat{y}_i\)</span> = predicted output</p>
+<hr />
+<h2 id="code-structure">Code Structure<a class="headerlink" href="#code-structure" title="Permanent link">&para;</a></h2>
+<pre><code>code/
+├── mlp.py              # Reusable MLP class
+└── exercise2.py        # Binary classification implementation
+
+images/
+├── exercise2_data.png
+├── exercise2_loss.png
+├── exercise2_decision_boundary.png
+├── exercise2_confusion_matrix.png
+└── exercise2_predictions.png
+</code></pre>
+<hr />
+<h2 id="observations-and-analysis">Observations and Analysis<a class="headerlink" href="#observations-and-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="strengths">Strengths<a class="headerlink" href="#strengths" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>High accuracy</strong>: 98.5% on test set demonstrates excellent learning</li>
+<li><strong>Good generalization</strong>: Minimal gap between train (99%) and test (98.5%) accuracy</li>
+<li><strong>Robust to complexity</strong>: Successfully handles the 2-cluster pattern in Class 1</li>
+<li><strong>Clean boundaries</strong>: Decision boundary is smooth and not overfitted</li>
+</ol>
+<h3 id="potential-improvements">Potential Improvements<a class="headerlink" href="#potential-improvements" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Regularization</strong>: Could add L2 regularization to prevent any overfitting</li>
+<li><strong>Early stopping</strong>: Monitor validation loss to stop training optimally</li>
+<li><strong>Learning rate scheduling</strong>: Decrease learning rate over time for finer convergence</li>
+<li><strong>Data augmentation</strong>: Could add noise to make the model more robust</li>
+</ol>
+<h3 id="challenges-addressed">Challenges Addressed<a class="headerlink" href="#challenges-addressed" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Imbalanced clusters</strong>: Different number of clusters per class</li>
+<li><strong>Non-linear separation</strong>: Requires complex decision boundary</li>
+<li><strong>From scratch implementation</strong>: No high-level frameworks used (only NumPy)</li>
+</ol>
+<hr />
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The MLP successfully learned to classify the binary dataset with <strong>98.5% test accuracy</strong>. The implementation demonstrates:</p>
+<p>✅ <strong>Correct forward and backward propagation</strong><br />
+✅ <strong>Effective training with mini-batch gradient descent</strong><br />
+✅ <strong>Strong generalization to unseen data</strong><br />
+✅ <strong>Clean, reusable code structure</strong>  </p>
+<p>The model effectively handles the challenging scenario of different cluster patterns per class, validating the MLP architecture and training approach.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
