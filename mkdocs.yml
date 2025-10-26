@@ -1,7 +1,25 @@
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
+  - admonition
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+
 site_name: Exercícios Perceptron
 site_url: https://guiparaiso.github.io/Deep-Learning-Pages/
 nav:
   - Home: index.md
+
+  - Data:
+      - Exercise 1: data/ex1/exercise1.md
+      - Exercise 2: data/ex2/exercise2.md
+      - Exercise 3: data/ex3/exercise3.md
   - Perceptron:
       - Exercise 1: perceptron/exercise1.md
       - Exercise 2: perceptron/exercise2.md
