@@ -8,14 +8,16 @@
       
       
       
-        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/perceptron/exercise2/">
+        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/data/ex2/exercise2/">
       
       
-        <link rel="prev" href="../exercise1/">
+        <link rel="prev" href="../../ex1/exercise1/">
       
       
+        <link rel="next" href="../../ex3/exercise3/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
@@ -24,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
       
       
 
@@ -43,7 +45,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercise-2-data-generation-with-overlap-and-perceptron-training" class="md-skip">
+        <a href="#exercise-2-non-linearity-in-higher-dimensions" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Exercícios Perceptron" class="md-header__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+    <a href="../../.." title="Exercícios Perceptron" class="md-header__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -176,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Exercícios Perceptron" class="md-nav__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
+    <a href="../../.." title="Exercícios Perceptron" class="md-nav__button md-logo" aria-label="Exercícios Perceptron" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -194,7 +196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -205,120 +207,6 @@
   
 
       </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Data
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Data
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data/ex1/exercise1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Exercise 1
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data/ex2/exercise2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Exercise 2
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../data/ex3/exercise3/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Exercise 3
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -340,15 +228,15 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Perceptron
+    Data
     
   </span>
   
@@ -356,10 +244,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Perceptron
+            Data
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -370,7 +258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exercise1/" class="md-nav__link">
+      <a href="../../ex1/exercise1/" class="md-nav__link">
         
   
   
@@ -443,36 +331,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data-generation-task" class="md-nav__link">
+  <a href="#1-dataset-generation" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Generation Task
+      1. Dataset Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Dataset Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class B
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dimensionality-reduction-and-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Dimensionality Reduction and Visualization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#perceptron-implementation-task" class="md-nav__link">
+  <a href="#3-observations" class="md-nav__link">
     <span class="md-ellipsis">
-      Perceptron Implementation Task
+      3. Observations
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
+  <a href="#4-example-visualization-of-decision-regions" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      4. Example Visualization of Decision Regions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#discussion" class="md-nav__link">
+  <a href="#5-conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      Discussion
+      5. Conclusion
     </span>
   </a>
   
@@ -482,6 +403,120 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perceptron/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perceptron/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -521,36 +556,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data-generation-task" class="md-nav__link">
+  <a href="#1-dataset-generation" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Generation Task
+      1. Dataset Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Dataset Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class B
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dimensionality-reduction-and-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Dimensionality Reduction and Visualization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#perceptron-implementation-task" class="md-nav__link">
+  <a href="#3-observations" class="md-nav__link">
     <span class="md-ellipsis">
-      Perceptron Implementation Task
+      3. Observations
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
+  <a href="#4-example-visualization-of-decision-regions" class="md-nav__link">
     <span class="md-ellipsis">
-      Results
+      4. Example Visualization of Decision Regions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#discussion" class="md-nav__link">
+  <a href="#5-conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      Discussion
+      5. Conclusion
     </span>
   </a>
   
@@ -572,48 +640,86 @@
 
 
 
-<h1 id="exercise-2-data-generation-with-overlap-and-perceptron-training">Exercise 2 — Data Generation with Overlap and Perceptron Training<a class="headerlink" href="#exercise-2-data-generation-with-overlap-and-perceptron-training" title="Permanent link">&para;</a></h1>
-<h2 id="data-generation-task">Data Generation Task<a class="headerlink" href="#data-generation-task" title="Permanent link">&para;</a></h2>
-<p>In this task, we generated two classes of 2D data points (1000 samples per class) using multivariate normal distributions. The parameters were chosen to create <strong>partial overlap</strong> between the classes:</p>
-<ul>
-<li><strong>Class 0</strong>: mean = [2.5, 2.5], covariance matrix = [[1.5, 0], [0, 1.5]]  </li>
-<li><strong>Class 1</strong>: mean = [4, 4], covariance matrix = [[1.5, 0], [0, 1.5]]  </li>
-</ul>
-<p>The larger variance along both dimensions (1.5) and the closer distance between the means result in clusters that are <strong>not fully linearly separable</strong>.<br />
-This overlap makes classification more challenging compared to Exercise 1.  </p>
-<p>The plot below illustrates the generated data, showing visible regions of overlap:  </p>
-<p><img alt="Overlapping Data" src="../Figure_4.png" /></p>
+<h1 id="exercise-2-non-linearity-in-higher-dimensions">Exercise 2 — Non-Linearity in Higher Dimensions<a class="headerlink" href="#exercise-2-non-linearity-in-higher-dimensions" title="Permanent link">&para;</a></h1>
+<h2 id="1-dataset-generation">1. Dataset Generation<a class="headerlink" href="#1-dataset-generation" title="Permanent link">&para;</a></h2>
+<p>In this exercise, we generated a dataset with <strong>500 samples for Class A</strong> and <strong>500 samples for Class B</strong>, using a <strong>multivariate normal distribution in 5 dimensions</strong>.<br />
+The parameters for each class are given below:</p>
+<h3 id="class-a">Class A<a class="headerlink" href="#class-a" title="Permanent link">&para;</a></h3>
+<p><strong>Mean vector:</strong></p>
+<div class="arithmatex">\[
+\mu_A = [0, 0, 0, 0, 0]
+\]</div>
+<p><strong>Covariance matrix:</strong></p>
+<div class="arithmatex">\[
+\Sigma_A =
+\begin{bmatrix}
+1.0 &amp; 0.8 &amp; 0.1 &amp; 0.0 &amp; 0.0 \\
+0.8 &amp; 1.0 &amp; 0.3 &amp; 0.0 &amp; 0.0 \\
+0.1 &amp; 0.3 &amp; 1.0 &amp; 0.5 &amp; 0.0 \\
+0.0 &amp; 0.0 &amp; 0.5 &amp; 1.0 &amp; 0.2 \\
+0.0 &amp; 0.0 &amp; 0.0 &amp; 0.2 &amp; 1.0
+\end{bmatrix}
+\]</div>
 <hr />
-<h2 id="perceptron-implementation-task">Perceptron Implementation Task<a class="headerlink" href="#perceptron-implementation-task" title="Permanent link">&para;</a></h2>
-<p>We reused the <strong>single-layer perceptron implementation</strong> from Exercise 2, applying the same initialization, update rule, and training process.  </p>
-<ul>
-<li>The perceptron was trained for up to <strong>100 epochs</strong>, or until convergence (no weight updates in a full pass).  </li>
-<li>Training accuracy was tracked at each epoch.  </li>
-<li>If the model did not converge, the <strong>final accuracy at 100 epochs</strong> was reported, and the possibility of oscillations was noted.  </li>
-<li>To reduce randomness, training was repeated across multiple runs with different initializations, and the <strong>best accuracy</strong> (or average across runs) was reported.  </li>
-</ul>
+<h3 id="class-b">Class B<a class="headerlink" href="#class-b" title="Permanent link">&para;</a></h3>
+<p><strong>Mean vector:</strong></p>
+<div class="arithmatex">\[
+\mu_B = [1.5, 1.5, 1.5, 1.5, 1.5]
+\]</div>
+<p><strong>Covariance matrix:</strong></p>
+<div class="arithmatex">\[
+\Sigma_B =
+\begin{bmatrix}
+1.5 &amp; -0.7 &amp; 0.2 &amp; 0.0 &amp; 0.0 \\
+-0.7 &amp; 1.5 &amp; 0.4 &amp; 0.0 &amp; 0.0 \\
+0.2 &amp; 0.4 &amp; 1.5 &amp; 0.6 &amp; 0.0 \\
+0.0 &amp; 0.0 &amp; 0.6 &amp; 1.5 &amp; 0.3 \\
+0.0 &amp; 0.0 &amp; 0.0 &amp; 0.3 &amp; 1.5
+\end{bmatrix}
+\]</div>
 <hr />
-<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Unlike in Exercise 2, the perceptron did <strong>not reach 100% accuracy</strong> due to the overlapping distributions.  </li>
-<li>Final accuracy stabilized below perfect classification (e.g., ~90–95%, depending on initialization).  </li>
-<li>The model occasionally oscillated in updates, as perfect linear separability is not possible.  </li>
-</ul>
-<p>The figure below shows the <strong>decision boundary</strong> found by the perceptron, overlaid on the data points:  </p>
-<p><img alt="Perceptron Boundary with Overlap" src="../Figure_5.png" /></p>
-<p>Misclassified points are highlighted with yellow markers:  </p>
-<p>The training accuracy over epochs is also shown, highlighting slower convergence and possible fluctuations:  </p>
-<p><img alt="Training Accuracy with Overlap" src="../Figure_6.png" /></p>
+<h2 id="2-dimensionality-reduction-and-visualization">2. Dimensionality Reduction and Visualization<a class="headerlink" href="#2-dimensionality-reduction-and-visualization" title="Permanent link">&para;</a></h2>
+<p>Since the dataset exists in <strong>5 dimensions</strong>, we cannot visualize it directly.<br />
+We use <strong>Principal Component Analysis (PCA)</strong> to reduce the data to <strong>2 dimensions</strong> and visualize it in a scatter plot.</p>
+<p><img alt="Dataset" src="../pca_scatter.png" /></p>
+<p>In this plot:
+- Blue points represent <strong>Class A</strong><br />
+- Orange points represent <strong>Class B</strong></p>
+<p>The projection reveals that the two classes partially overlap in 2D space, forming complex boundaries that are <strong>not linearly separable</strong>.</p>
 <hr />
-<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
-<p>The increased variance and closer means between the two classes introduced significant <strong>overlap</strong> in the feature space.<br />
-As a result:  </p>
-<ul>
-<li>The perceptron could not fully separate the data, since a linear boundary cannot resolve all cases.  </li>
-<li>Training either converged to a suboptimal solution or oscillated between weight updates.  </li>
-<li>Accuracy plateaued below 100%, typically in the <strong>90–95% range</strong>, reflecting the inherent non-separability.  </li>
-</ul>
-<p>This demonstrates a key limitation of the perceptron: while effective on linearly separable datasets, it struggles when overlap or non-linear boundaries are present. In such cases, more advanced models (e.g., multi-layer neural networks, kernel methods) are required.  </p>
+<h2 id="3-observations">3. Observations<a class="headerlink" href="#3-observations" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Distribution and overlap:</strong><br />
+   The two classes overlap significantly after projection.<br />
+   Although their 5D distributions differ, PCA compresses the most informative variance into 2D, making the overlap visible.<br />
+   This overlap indicates that there is <strong>no single straight line (linear boundary)</strong> that can perfectly separate the classes.</p>
+</li>
+<li>
+<p><strong>Linear separability:</strong><br />
+   The dataset is <strong>not linearly separable</strong>.<br />
+   A simple perceptron or logistic regression model would struggle to classify the two classes correctly because their projections intertwine in multiple directions.</p>
+</li>
+<li>
+<p><strong>Why a neural network is needed:</strong><br />
+   The relationships among features are <strong>non-linear</strong> — combinations of multiple dimensions interact in a way that a single linear function cannot capture.<br />
+   A <strong>multi-layer neural network</strong> with <strong>non-linear activation functions (like ReLU or tanh)</strong> can map these complex interactions, effectively learning curved and flexible decision surfaces in the high-dimensional space.</p>
+</li>
+</ol>
+<hr />
+<h2 id="4-example-visualization-of-decision-regions">4. Example Visualization of Decision Regions<a class="headerlink" href="#4-example-visualization-of-decision-regions" title="Permanent link">&para;</a></h2>
+<p>Below is an example (conceptual) of how a neural network could separate non-linear data after training:</p>
+<p><img alt="Non Linear Decision" src="../decision_mlp_pca.png" /></p>
+<p>The neural network learns <strong>curved boundaries</strong> that adapt to the geometry of the data, achieving much better separation than any linear model.</p>
+<p>Considering a linear nertwork, we would have as result:</p>
+<p><img alt="Linear Decision" src="../decision_lin_pca.png" /></p>
+<hr />
+<h2 id="5-conclusion">5. Conclusion<a class="headerlink" href="#5-conclusion" title="Permanent link">&para;</a></h2>
+<p>This experiment demonstrates that:
+- Data that appears inseparable in lower-dimensional projections may actually be separable in higher dimensions.<br />
+- Linear models are insufficient for capturing complex feature interactions.<br />
+- <strong>Deep neural networks</strong> with non-linear activations can approximate these complex boundaries effectively.</p>
+<hr />
 
 
 
@@ -662,10 +768,10 @@ As a result:  </p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
