@@ -1,0 +1,1257 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/vae/code/">
+      
+      
+        <link rel="prev" href="../vae/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Code - Deep Learning Exercises</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#necessary-configurations-to-use-vae" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Deep Learning Exercises" class="md-header__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Deep Learning Exercises
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Code
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Deep Learning Exercises" class="md-nav__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Deep Learning Exercises
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex1/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex2/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../perceptron/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../perceptron/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MLP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MLP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mlp/exercise1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mlp/ex2/exercise2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mlp/ex3/exercise3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mlp/ex4/exercise4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercise 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VAE
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            VAE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vae/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Code
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#necessary-configurations-to-use-vae" class="md-nav__link">
+    <span class="md-ellipsis">
+      Necessary Configurations to use VAE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-preparation-slit-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Preparation &amp; Slit Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vae-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      VAE Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-training-utilities-" class="md-nav__link">
+    <span class="md-ellipsis">
+      --- Training utilities ---
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-loop-salve-checkpoints-e-reconstructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Train loop (salve checkpoints e reconstructions)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generated-samples-from-the-latent-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Samples from the Latent Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latent-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latent Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconstructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstructions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#necessary-configurations-to-use-vae" class="md-nav__link">
+    <span class="md-ellipsis">
+      Necessary Configurations to use VAE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-preparation-slit-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Preparation &amp; Slit Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vae-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      VAE Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-training-utilities-" class="md-nav__link">
+    <span class="md-ellipsis">
+      --- Training utilities ---
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-loop-salve-checkpoints-e-reconstructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Train loop (salve checkpoints e reconstructions)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generated-samples-from-the-latent-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Samples from the Latent Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latent-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latent Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconstructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstructions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Code</h1>
+
+<h2 id="necessary-configurations-to-use-vae">Necessary Configurations to use VAE<a class="headerlink" href="#necessary-configurations-to-use-vae" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">!pip install torch torchvision matplotlib scikit-learn tqdm
+</code></pre>
+<pre><code class="language-python"># --- Imports e configurações ---
+import os
+import math
+import torch
+from torch import nn, optim
+from torch.utils.data import random_split, DataLoader
+from torchvision import datasets, transforms, utils
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import numpy as np
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+
+device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
+print(&quot;Device:&quot;, device)
+
+# --- Hyperparâmetros principais (modifique aqui) ---
+dataset_name = &quot;MNIST&quot;            # &quot;MNIST&quot; ou &quot;FashionMNIST&quot;
+batch_size = 128
+lr = 1e-3
+num_epochs = 20
+latent_dim = 2                    # comece em 2 para visualizar; experimente 8,16,32
+hidden_dim = 512
+seed = 42
+torch.manual_seed(seed)
+
+</code></pre>
+<pre><code>Device: cuda
+
+
+
+
+
+&lt;torch._C.Generator at 0x703482506ab0&gt;
+</code></pre>
+<h2 id="data-preparation-slit-data">Data Preparation &amp; Slit Data<a class="headerlink" href="#data-preparation-slit-data" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python"># --- Data preparation ---
+transform = transforms.Compose([
+    transforms.ToTensor(),         # [0,1]
+])
+
+if dataset_name.upper() == &quot;MNIST&quot;:
+    ds = datasets.MNIST(&quot;.&quot;, train=True, download=True, transform=transform)
+    ds_test = datasets.MNIST(&quot;.&quot;, train=False, download=True, transform=transform)
+else:
+    ds = datasets.FashionMNIST(&quot;.&quot;, train=True, download=True, transform=transform)
+    ds_test = datasets.FashionMNIST(&quot;.&quot;, train=False, download=True, transform=transform)
+
+# split train -&gt; train/val
+val_size = int(0.1 * len(ds))
+train_size = len(ds) - val_size
+train_ds, val_ds = random_split(ds, [train_size, val_size])
+
+train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=2, pin_memory=True)
+val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
+test_loader = DataLoader(ds_test, batch_size=batch_size, shuffle=False, num_workers=2, pin_memory=True)
+
+img_shape = next(iter(train_loader))[0].shape[1:]  # channels, H, W
+input_dim = int(np.prod(img_shape))
+print(&quot;Image shape:&quot;, img_shape, &quot;input_dim:&quot;, input_dim)
+
+</code></pre>
+<pre><code>100%|██████████| 9.91M/9.91M [00:05&lt;00:00, 1.88MB/s]
+100%|██████████| 28.9k/28.9k [00:00&lt;00:00, 216kB/s]
+100%|██████████| 1.65M/1.65M [00:01&lt;00:00, 1.02MB/s]
+100%|██████████| 4.54k/4.54k [00:00&lt;00:00, 6.65MB/s]
+
+
+Image shape: torch.Size([1, 28, 28]) input_dim: 784
+</code></pre>
+<h2 id="vae-model">VAE Model<a class="headerlink" href="#vae-model" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python"># --- VAE model ---
+class Encoder(nn.Module):
+    def __init__(self, input_dim, hidden_dim, latent_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+        )
+        self.fc_mu = nn.Linear(hidden_dim, latent_dim)
+        self.fc_logvar = nn.Linear(hidden_dim, latent_dim)
+
+    def forward(self, x):
+        h = self.net(x)
+        mu = self.fc_mu(h)
+        logvar = self.fc_logvar(h)
+        return mu, logvar
+
+class Decoder(nn.Module):
+    def __init__(self, latent_dim, hidden_dim, output_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(latent_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim),
+            nn.Sigmoid()   # output in [0,1] for BCE loss / images normalized
+        )
+        self.output_dim = output_dim
+
+    def forward(self, z):
+        x_hat = self.net(z)
+        x_hat = x_hat.view(-1, *img_shape)
+        return x_hat
+
+# reparameterization trick
+def reparameterize(mu, logvar):
+    # sample z ~ N(mu, sigma^2) by z = mu + eps * sigma
+    sigma = (0.5 * logvar).exp()
+    eps = torch.randn_like(sigma)
+    return mu + eps * sigma
+
+class VAE(nn.Module):
+    def __init__(self, input_dim, hidden_dim, latent_dim):
+        super().__init__()
+        self.encoder = Encoder(input_dim, hidden_dim, latent_dim)
+        self.decoder = Decoder(latent_dim, hidden_dim, input_dim)
+
+    def forward(self, x):
+        mu, logvar = self.encoder(x)
+        z = reparameterize(mu, logvar)
+        x_hat = self.decoder(z)
+        return x_hat, mu, logvar, z
+
+model = VAE(input_dim, hidden_dim, latent_dim).to(device)
+
+</code></pre>
+<pre><code class="language-python"># --- Loss function ---
+# Reconstruction: binary cross-entropy (pixel-wise) or MSE. For MNIST, BCE is common.
+reconstruction_loss_fn = nn.BCELoss(reduction=&quot;sum&quot;)  # sum over pixels
+
+def vae_loss(x, x_hat, mu, logvar):
+    # Reconstruction term (sum over pixels and batch)
+    recon_loss = reconstruction_loss_fn(x_hat, x)
+    # KL divergence between q(z|x)=N(mu, sigma^2) and p(z)=N(0,I)
+    # analytical form: -0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
+    kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+    return recon_loss + kld, recon_loss, kld
+
+</code></pre>
+<h2 id="-training-utilities-">--- Training utilities ---<a class="headerlink" href="#-training-utilities-" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python">
+optimizer = optim.Adam(model.parameters(), lr=lr)
+
+def train_epoch(model, loader, optimizer):
+    model.train()
+    total_loss = 0.0
+    total_recon = 0.0
+    total_kld = 0.0
+    for x, _ in loader:
+        x = x.to(device)
+        optimizer.zero_grad()
+        x_hat, mu, logvar, _ = model(x)
+        loss, recon, kld = vae_loss(x, x_hat, mu, logvar)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+        total_recon += recon.item()
+        total_kld += kld.item()
+    n = len(loader.dataset)
+    return total_loss / n, total_recon / n, total_kld / n
+
+def eval_epoch(model, loader):
+    model.eval()
+    total_loss = 0.0
+    total_recon = 0.0
+    total_kld = 0.0
+    with torch.no_grad():
+        for x, _ in loader:
+            x = x.to(device)
+            x_hat, mu, logvar, _ = model(x)
+            loss, recon, kld = vae_loss(x, x_hat, mu, logvar)
+            total_loss += loss.item()
+            total_recon += recon.item()
+            total_kld += kld.item()
+    n = len(loader.dataset)
+    return total_loss / n, total_recon / n, total_kld / n
+
+</code></pre>
+<h2 id="train-loop-salve-checkpoints-e-reconstructions">Train loop (salve checkpoints e reconstructions)<a class="headerlink" href="#train-loop-salve-checkpoints-e-reconstructions" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python">out_dir = &quot;vae_outputs&quot;
+os.makedirs(out_dir, exist_ok=True)
+
+train_logs = []
+val_logs = []
+
+for epoch in range(1, num_epochs + 1):
+    train_loss, train_recon, train_kld = train_epoch(model, train_loader, optimizer)
+    val_loss, val_recon, val_kld = eval_epoch(model, val_loader)
+    train_logs.append((train_loss, train_recon, train_kld))
+    val_logs.append((val_loss, val_recon, val_kld))
+    print(f&quot;Epoch {epoch}/{num_epochs} | train loss {train_loss:.4f} (recon {train_recon:.4f} kld {train_kld:.4f})&quot;
+          f&quot; | val loss {val_loss:.4f}&quot;)
+
+    # salvar reconstructions do primeiro batch de validação
+    model.eval()
+    with torch.no_grad():
+        batch = next(iter(val_loader))
+        x_batch = batch[0].to(device)[:64]
+        x_hat, _, _, _ = model(x_batch)
+        comp = torch.cat([x_batch, x_hat])
+        utils.save_image(comp, os.path.join(out_dir, f&quot;recon_epoch_{epoch}.png&quot;), nrow=8)
+    # salvar checkpoint
+    torch.save(model.state_dict(), os.path.join(out_dir, f&quot;vae_epoch_{epoch}.pt&quot;))
+
+</code></pre>
+<pre><code>Epoch 1/20 | train loss 182.2217 (recon 178.2746 kld 3.9472) | val loss 163.1446
+Epoch 2/20 | train loss 159.1858 (recon 153.8162 kld 5.3695) | val loss 156.3814
+Epoch 3/20 | train loss 154.2066 (recon 148.5150 kld 5.6916) | val loss 153.0369
+Epoch 4/20 | train loss 151.1981 (recon 145.3248 kld 5.8733) | val loss 151.3613
+Epoch 5/20 | train loss 149.2998 (recon 143.2870 kld 6.0128) | val loss 149.5301
+Epoch 6/20 | train loss 147.8186 (recon 141.7210 kld 6.0976) | val loss 148.3453
+Epoch 7/20 | train loss 146.6467 (recon 140.4719 kld 6.1748) | val loss 147.2913
+Epoch 8/20 | train loss 145.6143 (recon 139.3391 kld 6.2751) | val loss 146.3943
+Epoch 9/20 | train loss 144.6457 (recon 138.2977 kld 6.3480) | val loss 145.2695
+Epoch 10/20 | train loss 144.0065 (recon 137.6086 kld 6.3979) | val loss 144.8309
+Epoch 11/20 | train loss 143.1517 (recon 136.6880 kld 6.4636) | val loss 144.4022
+Epoch 12/20 | train loss 142.5093 (recon 135.9971 kld 6.5123) | val loss 144.0073
+Epoch 13/20 | train loss 142.0747 (recon 135.5276 kld 6.5471) | val loss 143.3177
+Epoch 14/20 | train loss 141.6406 (recon 135.0651 kld 6.5756) | val loss 142.9371
+Epoch 15/20 | train loss 141.0354 (recon 134.4191 kld 6.6163) | val loss 142.3620
+Epoch 16/20 | train loss 140.8359 (recon 134.1892 kld 6.6467) | val loss 142.6515
+Epoch 17/20 | train loss 140.6957 (recon 134.0500 kld 6.6457) | val loss 142.5116
+Epoch 18/20 | train loss 140.3433 (recon 133.6568 kld 6.6865) | val loss 141.8607
+Epoch 19/20 | train loss 139.9144 (recon 133.1718 kld 6.7427) | val loss 141.7232
+Epoch 20/20 | train loss 139.4536 (recon 132.7206 kld 6.7330) | val loss 141.9866
+</code></pre>
+<pre><code class="language-python"># --- Visualizar curvas de perda ---
+train_loss = [t[0] for t in train_logs]
+val_loss = [v[0] for v in val_logs]
+plt.figure(figsize=(6,4))
+plt.plot(train_loss, label=&quot;train loss&quot;)
+plt.plot(val_loss, label=&quot;val loss&quot;)
+plt.yscale(&quot;log&quot;)
+plt.legend()
+plt.xlabel(&quot;Epoch&quot;)
+plt.ylabel(&quot;Loss (log scale)&quot;)
+plt.title(&quot;VAE Loss&quot;)
+plt.savefig(os.path.join(out_dir, &quot;loss_curve.png&quot;))
+plt.show()
+
+</code></pre>
+<p><img alt="Loss Curve" src="../loss_curve.png" /></p>
+<h2 id="generated-samples-from-the-latent-space">Generated Samples from the Latent Space<a class="headerlink" href="#generated-samples-from-the-latent-space" title="Permanent link">&para;</a></h2>
+<p>The VAE successfully generates coherent digit-like samples by decoding random latent vectors sampled from a standard normal distribution.</p>
+<pre><code class="language-python">n_samples = 64
+with torch.no_grad():
+    z = torch.randn(n_samples, latent_dim).to(device)
+    samples = model.decoder(z)
+    utils.save_image(samples, os.path.join(out_dir, &quot;samples_prior.png&quot;), nrow=8)
+    plt.figure(figsize=(6,6))
+    plt.axis(&quot;off&quot;)
+    plt.imshow(utils.make_grid(samples.cpu(), nrow=8).permute(1,2,0).squeeze())
+    plt.show()
+
+</code></pre>
+<p><img alt="Samples" src="../samples.png" /></p>
+<h2 id="latent-space">Latent Space<a class="headerlink" href="#latent-space" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python"># --- Visualizar espaço latente (latent_dim &lt;=3: scatter, caso contrário usar PCA/t-SNE) ---
+# Vamos obter mu do conjunto de teste (ou validação) para representar cada imagem com seu mu
+model.eval()
+zs = []
+labels = []
+with torch.no_grad():
+    for x, y in test_loader:
+        x = x.to(device)
+        mu, logvar = model.encoder(x)
+        zs.append(mu.cpu().numpy())
+        labels.append(y.numpy())
+zs = np.concatenate(zs, axis=0)
+labels = np.concatenate(labels, axis=0)
+
+if latent_dim == 2:
+    plt.figure(figsize=(6,6))
+    sc = plt.scatter(zs[:,0], zs[:,1], c=labels, cmap=&quot;tab10&quot;, s=5)
+    plt.colorbar(sc, ticks=range(10))
+    plt.title(&quot;Latent space (mu) - 2D&quot;)
+    plt.savefig(os.path.join(out_dir, &quot;latent_2d.png&quot;))
+    plt.show()
+else:
+    # usar PCA e t-SNE
+    pca = PCA(n_components=2)
+    z_pca = pca.fit_transform(zs)
+    plt.figure(figsize=(6,6))
+    plt.scatter(z_pca[:,0], z_pca[:,1], c=labels, s=5, cmap=&quot;tab10&quot;)
+    plt.title(&quot;Latent space projected with PCA&quot;)
+    plt.savefig(os.path.join(out_dir, &quot;latent_pca.png&quot;))
+    plt.show()
+
+    tsne = TSNE(n_components=2, perplexity=30, init='pca', random_state=seed)
+    z_tsne = tsne.fit_transform(zs[:5000])  # por performance, usar subset
+    labs = labels[:5000]
+    plt.figure(figsize=(6,6))
+    plt.scatter(z_tsne[:,0], z_tsne[:,1], c=labs, s=5, cmap=&quot;tab10&quot;)
+    plt.title(&quot;Latent space projected with t-SNE (subset)&quot;)
+    plt.savefig(os.path.join(out_dir, &quot;latent_tsne.png&quot;))
+    plt.show()
+
+</code></pre>
+<p><img alt="png" src="../latent_2d.png" /></p>
+<h2 id="reconstructions">Reconstructions<a class="headerlink" href="#reconstructions" title="Permanent link">&para;</a></h2>
+<p>The model successfully reconstructs digits, preserving the general shape and structure.<br />
+Some blurring and noise are expected due to the probabilistic nature of the VAE.</p>
+<pre><code class="language-python"># --- Reconstrução lado a lado (exibir/guardar) ---
+# Carregar algumas imagens test e mostrar original vs recon
+with torch.no_grad():
+    x, _ = next(iter(test_loader))
+    x = x[:16].to(device)
+    x_hat, _, _, _ = model(x)
+    comp = torch.cat([x, x_hat])
+    utils.save_image(comp, os.path.join(out_dir, &quot;reconstructions.png&quot;), nrow=8)
+    plt.figure(figsize=(6,4))
+    plt.axis(&quot;off&quot;)
+    plt.imshow(utils.make_grid(comp.cpu(), nrow=8).permute(1,2,0).squeeze())
+    plt.show()
+
+</code></pre>
+<p><img alt="Recons" src="../recon_epoch_1.png" /></p>
+<pre><code class="language-python">
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -8,25 +8,25 @@
       
       
       
-        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/data/ex1/exercise1/">
+        <link rel="canonical" href="https://guiparaiso.github.io/Deep-Learning-Pages/vae/vae/">
       
       
-        <link rel="prev" href="../../..">
+        <link rel="prev" href="../../mlp/ex4/exercise4/">
       
       
-        <link rel="next" href="../../ex2/exercise2/">
+        <link rel="next" href="../code/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
-        <title>Exercise 1 - Deep Learning Exercises</title>
+        <title>Report - Deep Learning Exercises</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
       
       
 
@@ -45,7 +45,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercise-1-exploring-class-separability-in-2d" class="md-skip">
+        <a href="#variational-autoencoder-vae" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Deep Learning Exercises" class="md-header__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
+    <a href="../.." title="Deep Learning Exercises" class="md-header__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercise 1
+              Report
             
           </span>
         </div>
@@ -178,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Deep Learning Exercises" class="md-nav__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
+    <a href="../.." title="Deep Learning Exercises" class="md-nav__button md-logo" aria-label="Deep Learning Exercises" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -196,7 +196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -215,20 +215,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -244,7 +242,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Data
@@ -255,32 +253,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Exercise 1
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../data/ex1/exercise1/" class="md-nav__link">
         
   
   
@@ -291,104 +267,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-dataset-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Dataset Generation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-scatter-plot-and-observations" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Scatter Plot and Observations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-linear-vs-non-linear-decision-boundaries" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Linear vs Non-linear Decision Boundaries
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Linear vs Non-linear Decision Boundaries">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#linear-model-logistic-regression" class="md-nav__link">
-    <span class="md-ellipsis">
-      Linear Model (Logistic Regression)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#non-linear-model-mlp-with-tanh" class="md-nav__link">
-    <span class="md-ellipsis">
-      Non-linear Model (MLP with tanh)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-manual-boundary-sketch" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Manual Boundary Sketch
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Analysis
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Conclusion
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -401,7 +279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ex2/exercise2/" class="md-nav__link">
+      <a href="../../data/ex2/exercise2/" class="md-nav__link">
         
   
   
@@ -424,7 +302,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ex3/exercise3/" class="md-nav__link">
+      <a href="../../data/ex3/exercise3/" class="md-nav__link">
         
   
   
@@ -492,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../perceptron/exercise1/" class="md-nav__link">
+      <a href="../../perceptron/exercise1/" class="md-nav__link">
         
   
   
@@ -515,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../perceptron/exercise2/" class="md-nav__link">
+      <a href="../../perceptron/exercise2/" class="md-nav__link">
         
   
   
@@ -583,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mlp/exercise1/" class="md-nav__link">
+      <a href="../../mlp/exercise1/" class="md-nav__link">
         
   
   
@@ -606,7 +484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mlp/ex2/exercise2/" class="md-nav__link">
+      <a href="../../mlp/ex2/exercise2/" class="md-nav__link">
         
   
   
@@ -629,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mlp/ex3/exercise3/" class="md-nav__link">
+      <a href="../../mlp/ex3/exercise3/" class="md-nav__link">
         
   
   
@@ -652,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mlp/ex4/exercise4/" class="md-nav__link">
+      <a href="../../mlp/ex4/exercise4/" class="md-nav__link">
         
   
   
@@ -679,18 +557,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -706,7 +586,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             VAE
@@ -717,10 +597,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../vae/vae/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Report
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -731,6 +633,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-loss-curves" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Loss Curves
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reconstructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Reconstructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-generated-samples" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Generated Samples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-latent-space-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Latent Space Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -743,7 +752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vae/code/" class="md-nav__link">
+      <a href="../code/" class="md-nav__link">
         
   
   
@@ -793,46 +802,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-dataset-generation" class="md-nav__link">
+  <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Dataset Generation
+      Objective
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-scatter-plot-and-observations" class="md-nav__link">
+  <a href="#implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Scatter Plot and Observations
+      Implementation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-linear-vs-non-linear-decision-boundaries" class="md-nav__link">
+  <a href="#results" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Linear vs Non-linear Decision Boundaries
+      Results
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Linear vs Non-linear Decision Boundaries">
+    <nav class="md-nav" aria-label="Results">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#linear-model-logistic-regression" class="md-nav__link">
+  <a href="#1-loss-curves" class="md-nav__link">
     <span class="md-ellipsis">
-      Linear Model (Logistic Regression)
+      1. Loss Curves
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#non-linear-model-mlp-with-tanh" class="md-nav__link">
+  <a href="#2-reconstructions" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-linear Model (MLP with tanh)
+      2. Reconstructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-generated-samples" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Generated Samples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-latent-space-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Latent Space Visualization
     </span>
   </a>
   
@@ -844,27 +871,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-manual-boundary-sketch" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Manual Boundary Sketch
+      Summary
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-analysis" class="md-nav__link">
+  <a href="#code" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Analysis
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Conclusion
+      Code
     </span>
   </a>
   
@@ -886,93 +904,53 @@
 
 
 
-<h1 id="exercise-1-exploring-class-separability-in-2d">Exercise 1 — Exploring Class Separability in 2D<a class="headerlink" href="#exercise-1-exploring-class-separability-in-2d" title="Permanent link">&para;</a></h1>
-<h2 id="1-dataset-generation">1. Dataset Generation<a class="headerlink" href="#1-dataset-generation" title="Permanent link">&para;</a></h2>
-<p>A synthetic dataset was created with a total of <strong>400 samples</strong>, equally divided among <strong>4 classes (100 each)</strong>.<br />
-Each class was drawn from a <strong>2D Gaussian distribution</strong> with the following parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Class</th>
-<th style="text-align: left;">Mean (μ)</th>
-<th style="text-align: left;">Standard Deviation (σ)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">[2, 3]</td>
-<td style="text-align: left;">[0.8, 2.5]</td>
-</tr>
-<tr>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">[5, 6]</td>
-<td style="text-align: left;">[1.2, 1.9]</td>
-</tr>
-<tr>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">[8, 1]</td>
-<td style="text-align: left;">[0.9, 0.9]</td>
-</tr>
-<tr>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">[15, 4]</td>
-<td style="text-align: left;">[0.5, 2.0]</td>
-</tr>
-</tbody>
-</table>
-<p>The resulting data points form four distinct clusters in the 2D plane.</p>
+<h1 id="variational-autoencoder-vae">Variational Autoencoder (VAE)<a class="headerlink" href="#variational-autoencoder-vae" title="Permanent link">&para;</a></h1>
+<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>The goal of this exercise was to implement and train a <strong>Variational Autoencoder (VAE)</strong> using the <strong>MNIST dataset</strong>, exploring the model’s ability to:
+- Reconstruct input images;
+- Generate new samples from the latent space;
+- Visualize and interpret the learned latent representation.</p>
 <hr />
-<h2 id="2-scatter-plot-and-observations">2. Scatter Plot and Observations<a class="headerlink" href="#2-scatter-plot-and-observations" title="Permanent link">&para;</a></h2>
-<p>Below is the scatter plot showing the 400 samples colored by class:</p>
-<p><img alt="Scatter Plot" src="../scatter_4classes.png" /></p>
-<p><strong>Observations:</strong>
-- <strong>Class 0</strong> is centered around (2, 3) and vertically elongated because of the large σ_y = 2.5.<br />
-- <strong>Class 1</strong> (mean ≈ (5, 6)) forms a more compact cluster slightly above Class 0.<br />
-- <strong>Class 2</strong> (mean ≈ (8, 1)) lies in the lower-right area and is fairly circular.<br />
-- <strong>Class 3</strong> (mean ≈ (15, 4)) is far to the right, clearly separated from the others.</p>
-<p>There is <strong>little overlap</strong> between most classes — only minor intersections between Classes 0 and 1 due to their proximity.</p>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<p>The model was developed in <strong>PyTorch</strong>, consisting of:
+- <strong>Encoder</strong> — two fully connected layers with ReLU activations producing vectors <code>μ</code> (mean) and <code>logσ²</code> (log-variance);
+- <strong>Reparameterization</strong> — sampling via <code>z = μ + σ * ε</code>, where <code>ε ~ N(0, I)</code>;
+- <strong>Decoder</strong> — symmetric layers ending with a Sigmoid activation;
+- <strong>Loss function</strong> — sum of <em>Binary Cross-Entropy</em> (reconstruction) and <em>KL Divergence</em> (latent regularization).</p>
+<p>Training configuration:
+- Optimizer: <strong>Adam</strong> (lr = 1e-3)<br />
+- Batch size: <strong>128</strong><br />
+- Epochs: <strong>20</strong><br />
+- Latent dimension: <strong>2</strong> (for visualization)<br />
+- Dataset: <strong>MNIST</strong>, normalized to <code>[0, 1]</code>.</p>
 <hr />
-<h2 id="3-linear-vs-non-linear-decision-boundaries">3. Linear vs Non-linear Decision Boundaries<a class="headerlink" href="#3-linear-vs-non-linear-decision-boundaries" title="Permanent link">&para;</a></h2>
-<p>Two models were trained to visualize the decision regions:</p>
-<ul>
-<li><strong>Logistic Regression (linear classifier)</strong></li>
-<li><strong>MLP with tanh activation (non-linear classifier)</strong></li>
-</ul>
-<h3 id="linear-model-logistic-regression">Linear Model (Logistic Regression)<a class="headerlink" href="#linear-model-logistic-regression" title="Permanent link">&para;</a></h3>
-<p><img alt="Linear Decision" src="../decision_lin.png" /></p>
-<p>The linear model creates <strong>straight decision boundaries</strong>, effectively separating most clusters.<br />
-Its test accuracy reached <strong>0.98</strong>, showing that the dataset is <em>almost linearly separable</em>.</p>
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<h3 id="1-loss-curves">1. Loss Curves<a class="headerlink" href="#1-loss-curves" title="Permanent link">&para;</a></h3>
+<p>The loss curve shows stable convergence across epochs.<br />
+The reconstruction term dominates early training, while the KL term gradually increases.</p>
+<p><img alt="Loss curve" src="../loss_curve.png" /></p>
 <hr />
-<h3 id="non-linear-model-mlp-with-tanh">Non-linear Model (MLP with tanh)<a class="headerlink" href="#non-linear-model-mlp-with-tanh" title="Permanent link">&para;</a></h3>
-<p><img alt="Non Linear Decision" src="../decision_mlp.png" /></p>
-<p>The MLP achieved <strong>perfect accuracy (1.00)</strong> and learned <strong>slightly curved boundaries</strong>, allowing a smoother fit between classes with small overlap.</p>
+<h3 id="2-reconstructions">2. Reconstructions<a class="headerlink" href="#2-reconstructions" title="Permanent link">&para;</a></h3>
+<p>The model successfully reconstructs digits, preserving the general shape and structure.<br />
+Some blurring and noise are expected due to the probabilistic nature of the VAE.</p>
+<p><img alt="Reconstructions (final epoch)" src="../recon_epoch_1.png" /></p>
+<p>As training progresses, reconstructions become clearer and more accurate.</p>
 <hr />
-<h2 id="4-manual-boundary-sketch">4. Manual Boundary Sketch<a class="headerlink" href="#4-manual-boundary-sketch" title="Permanent link">&para;</a></h2>
-<p>Below is a scatter plot with manually drawn illustrative linear boundaries that could roughly separate the four classes:</p>
-<p><img alt="Scatter Plot with Lines " src="../scatter_with_lines.png" /></p>
-<p>The dashed lines represent possible linear decision boundaries that a simple classifier could learn.<br />
-A neural network could create smoother, curved separations in the overlapping regions.</p>
+<h3 id="3-generated-samples">3. Generated Samples<a class="headerlink" href="#3-generated-samples" title="Permanent link">&para;</a></h3>
+<p>By sampling latent vectors <code>z ~ N(0, I)</code> and decoding them, the VAE generates coherent and diverse digits, showing that the latent space is well structured.</p>
+<p><img alt="Samples from prior" src="../samples.png" /></p>
+<p>Generated digits are plausible, though slightly distorted — typical for basic VAEs.</p>
 <hr />
-<h2 id="5-analysis">5. Analysis<a class="headerlink" href="#5-analysis" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p><strong>Distribution and overlap:</strong><br />
-   Each class forms a distinct Gaussian cluster. The spread differs per class, producing varying degrees of overlap. The largest overlap occurs between Classes 0 and 1 because they are spatially closer and both elongated along the y-axis.</p>
-</li>
-<li>
-<p><strong>Can a linear boundary separate all classes?</strong><br />
-   Almost. The data is <em>mostly</em> linearly separable — a combination of a few straight lines can correctly classify most points. However, perfect separation may require non-linear adjustment near overlapping regions.</p>
-</li>
-<li>
-<p><strong>Expected neural network boundaries:</strong><br />
-   A neural network with non-linear activation (like tanh) would learn slightly curved or piecewise-linear boundaries. These adapt to subtle overlaps, refining the classification margins beyond what purely linear models can achieve.</p>
-</li>
-</ol>
-<hr />
-<h2 id="6-conclusion">6. Conclusion<a class="headerlink" href="#6-conclusion" title="Permanent link">&para;</a></h2>
-<p>This exercise demonstrates that even when data is mostly separable with straight lines, neural networks with non-linear activation can learn smoother and more flexible decision surfaces, improving performance where overlap or curvature exists.</p>
-<hr />
+<h3 id="4-latent-space-visualization">4. Latent Space Visualization<a class="headerlink" href="#4-latent-space-visualization" title="Permanent link">&para;</a></h3>
+<p>With <code>latent_dim = 2</code>, the learned latent means <code>μ</code> can be directly plotted.</p>
+<p><img alt="Latent 2D space" src="../latent_2d.png" /></p>
+<p>Classes are smoothly organized in the 2D latent space; nearby regions correspond to similar digits (e.g., 3 and 8).<br />
+This demonstrates that the VAE learned a meaningful and continuous representation.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>This exercise demonstrated how a VAE combines reconstruction and probabilistic modeling to learn continuous latent representations.<br />
+Results show that the model can both reconstruct and generate coherent samples, providing a foundation for more advanced generative architectures such as convolutional VAEs and diffusion models.</p>
+<h2 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
+<p>If you wants to check the code used, go to Code.</p>
 
 
 
@@ -1021,10 +999,10 @@ A neural network could create smoother, curved separations in the overlapping re
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

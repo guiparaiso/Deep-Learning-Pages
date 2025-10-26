@@ -14,6 +14,8 @@
         <link rel="prev" href="../../ex3/exercise3/">
       
       
+        <link rel="next" href="../../../vae/vae/">
+      
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
@@ -898,12 +900,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vae/exercise1.md" class="md-nav__link">
+      <a href="../../../vae/vae/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Exercise 1
+    Report
     
   </span>
   
@@ -921,35 +923,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vae/exercise2.md" class="md-nav__link">
+      <a href="../../../vae/code/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Exercise 2
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../vae/exercise3.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Exercise 3
+    Code
     
   </span>
   
@@ -1271,10 +1250,10 @@
 <h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>Repeat Exercise 3 with a <strong>deeper MLP architecture</strong> containing <strong>at least 2 hidden layers</strong>. The focus is on demonstrating how depth affects model performance and learning dynamics.</p>
 <h3 id="key-requirements">Key Requirements<a class="headerlink" href="#key-requirements" title="Permanent link">&para;</a></h3>
-<p>✅ Same dataset as Exercise 3 (1500 samples, 3 classes, 4 features)<br />
-✅ At least 2 hidden layers (we use <strong>3 hidden layers</strong>)<br />
-✅ Reuse the same MLP implementation<br />
-✅ Compare performance with shallower architecture</p>
+<p>Same dataset as Exercise 3 (1500 samples, 3 classes, 4 features)<br />
+2 hidden layers (we use <strong>3 hidden layers</strong>)<br />
+Reuse the same MLP implementation<br />
+Compare performance with shallower architecture</p>
 <hr />
 <h2 id="dataset">Dataset<a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h2>
 <p>We use the <strong>exact same dataset</strong> from Exercise 3:</p>
@@ -1394,9 +1373,9 @@
 <h3 id="visual-comparison">Visual Comparison<a class="headerlink" href="#visual-comparison" title="Permanent link">&para;</a></h3>
 <p><img alt="Architecture Comparison" src="../exercise4_architecture.png" /></p>
 <p>The deep architecture has:
-- ✅ <strong>3 hidden layers</strong> vs 2
-- ✅ <strong>703 parameters</strong> vs 243 (~2.9x more)
-- ✅ <strong>More representational capacity</strong></p>
+- <strong>3 hidden layers</strong> vs 2
+- <strong>703 parameters</strong> vs 243 (~2.9x more)
+- <strong>More representational capacity</strong></p>
 <hr />
 <h2 id="training-process">Training Process<a class="headerlink" href="#training-process" title="Permanent link">&para;</a></h2>
 <p>Both models trained with identical hyperparameters:</p>
@@ -1491,10 +1470,10 @@
 </tbody>
 </table>
 <h3 id="key-findings">Key Findings<a class="headerlink" href="#key-findings" title="Permanent link">&para;</a></h3>
-<p>✅ <strong>Better accuracy</strong>: Deep MLP achieves higher test accuracy<br />
-✅ <strong>Better optimization</strong>: Significantly lower training loss<br />
-✅ <strong>Good generalization</strong>: Small train-test gap for both<br />
-✅ <strong>Parameter efficiency</strong>: Modest accuracy gain for 2.9x parameters</p>
+<p><strong>Better accuracy</strong>: Deep MLP achieves higher test accuracy<br />
+<strong>Better optimization</strong>: Significantly lower training loss<br />
+<strong>Good generalization</strong>: Small train-test gap for both<br />
+<strong>Parameter efficiency</strong>: Modest accuracy gain for 2.9x parameters</p>
 <h3 id="confusion-matrices">Confusion Matrices<a class="headerlink" href="#confusion-matrices" title="Permanent link">&para;</a></h3>
 <p><img alt="Confusion Matrices Comparison" src="../exercise4_confusion_matrices.png" /></p>
 <p><strong>Deep MLP (left):</strong>
@@ -1572,28 +1551,28 @@ weighted avg       0.94      0.94      0.94       300
 <tbody>
 <tr>
 <td><strong>Accuracy</strong></td>
-<td>✅ Higher</td>
+<td>Higher</td>
 <td>Lower</td>
 </tr>
 <tr>
 <td><strong>Parameters</strong></td>
-<td>⚠️ More (703)</td>
-<td>✅ Fewer (243)</td>
+<td>More (703)</td>
+<td>Fewer (243)</td>
 </tr>
 <tr>
 <td><strong>Training time</strong></td>
-<td>⚠️ Slower</td>
-<td>✅ Faster</td>
+<td>Slower</td>
+<td>Faster</td>
 </tr>
 <tr>
 <td><strong>Overfitting risk</strong></td>
-<td>⚠️ Higher</td>
-<td>✅ Lower</td>
+<td>Higher</td>
+<td>Lower</td>
 </tr>
 <tr>
 <td><strong>Memory usage</strong></td>
-<td>⚠️ More</td>
-<td>✅ Less</td>
+<td>More</td>
+<td>Less</td>
 </tr>
 </tbody>
 </table>
@@ -1605,9 +1584,9 @@ weighted avg       0.94      0.94      0.94       300
 <hr />
 <h2 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
 <h3 id="code-reusability-again">Code Reusability (Again!)<a class="headerlink" href="#code-reusability-again" title="Permanent link">&para;</a></h3>
-<p>✅ <strong>Same MLP class</strong> from Exercises 2 and 3<br />
-✅ <strong>Zero code changes</strong> to core implementation<br />
-✅ <strong>Only hyperparameters modified</strong>: layer sizes</p>
+<p><strong>Same MLP class</strong> from Exercises 2 and 3<br />
+<strong>Zero code changes</strong> to core implementation<br />
+<strong>Only hyperparameters modified</strong>: layer sizes</p>
 <pre><code class="language-python"># Exercise 2: Binary
 mlp = MLP([2, 8, 4, 1], ...)
 
@@ -1618,9 +1597,9 @@ mlp = MLP([4, 16, 8, 3], ...)
 mlp = MLP([4, 32, 16, 8, 3], ...)  # Added one more hidden layer!
 </code></pre>
 <p>The implementation seamlessly handles:
-- ✅ Variable number of hidden layers
-- ✅ Different layer widths
-- ✅ Any output size (binary or multi-class)</p>
+- Variable number of hidden layers
+- Different layer widths
+- Any output size (binary or multi-class)</p>
 <h3 id="gradient-flow-in-deep-networks">Gradient Flow in Deep Networks<a class="headerlink" href="#gradient-flow-in-deep-networks" title="Permanent link">&para;</a></h3>
 <p>With 3 hidden layers, gradients must flow through more</p>
 
